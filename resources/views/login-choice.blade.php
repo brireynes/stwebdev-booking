@@ -5,7 +5,8 @@
     <p>{{ $description }}</p>
 
     <div class="action-group">
-        <a class="button-link" href="{{ route('register') }}">Register</a>
-        <a class="button-link" href="{{ route('login.choice') }}">Login</a>
+        @foreach ($options as $option)
+            <a class="button-link" href="{{ $option['route'] }}">{{ $option['label'] }}</a>
+        @endforeach
     </div>
 @endsection

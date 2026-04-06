@@ -364,6 +364,8 @@
         'booking',          // ✅ added
         'admin.dashboard',  // ✅ added
         'user.home',        // ✅ added
+        'admin.users',        // ✅ added
+        'admin.bookings',     // ✅ added
     ];
 @endphp
 

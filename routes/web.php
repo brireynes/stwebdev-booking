@@ -152,3 +152,11 @@ Route::get('/admin', function () {
         ],
     ]);
 })->name('admin.dashboard');
+
+Route::get('/about', function () {
+    return view('about', [
+        'title' => 'About Us',
+        'navType' => 'guest',
+    ]);
+})->name('about');
+

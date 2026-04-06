@@ -1,11 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>{{ $title }}</h1>
-    <p>{{ $description }}</p>
+    
 
-    <div class="action-group">
-        <a class="button-link" href="{{ route('register') }}">Register</a>
-        <a class="button-link" href="{{ route('login.choice') }}">Login</a>
-    </div>
+
 @endsection

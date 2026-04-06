@@ -246,46 +246,53 @@
         @yield('content')
 
         {{-- SHOW SECTIONS ONLY IF NOT LOGIN OR REGISTER PAGES --}}
-        @unless(
-            request()->routeIs('login.choice') ||
-            request()->routeIs('register') ||
-            request()->routeIs('login') ||
-            request()->routeIs('login/user') ||
-            request()->routeIs('login/admin')
-        )
+       @php
+    $hideSectionsRoutes = [
+        'login.choice',
+        'register',
+        'login',
+        'user.login',
+        'admin.login',
+        'booking',          // ✅ added
+        'admin.dashboard',  // ✅ added
+        'user.home',        // ✅ added
+    ];
+@endphp
 
-        <section class="section section-1">
-            <h2>Banner</h2>
-            <p>Placeholder content for section 1.</p>
-        </section>
+@if (!request()->routeIs($hideSectionsRoutes))
 
-        <section class="section section-2">
-            <h2>Container 2</h2>
+<section class="section section-1">
+    <h2>Banner</h2>
+    <p>Placeholder content for section 1.</p>
+</section>
 
-            <div class="cards-container">
-                <a href="#" class="card">
-                    <h3>Option 1</h3>
-                    <p>Click to view details</p>
-                </a>
+<section class="section section-2">
+    <h2>Container 2</h2>
 
-                <a href="#" class="card">
-                    <h3>Option 2</h3>
-                    <p>Click to view details</p>
-                </a>
+    <div class="cards-container">
+        <a href="#" class="card">
+            <h3>Option 1</h3>
+            <p>Click to view details</p>
+        </a>
 
-                <a href="#" class="card">
-                    <h3>Option 3</h3>
-                    <p>Click to view details</p>
-                </a>
-            </div>
-        </section>
+        <a href="#" class="card">
+            <h3>Option 2</h3>
+            <p>Click to view details</p>
+        </a>
 
-        <section class="section section-3">
-            <h2>Book Now!</h2>
-            <p>Placeholder content for section 3.</p>
-        </section>
+        <a href="#" class="card">
+            <h3>Option 3</h3>
+            <p>Click to view details</p>
+        </a>
+    </div>
+</section>
 
-        @endunless
+<section class="section section-3">
+    <h2>Book Now!</h2>
+    <p>Placeholder content for section 3.</p>
+</section>
+
+@endif
 
     </div>
 </main>

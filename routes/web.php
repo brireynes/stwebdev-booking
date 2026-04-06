@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -141,17 +142,17 @@ Route::get('/booking', function () {
     ]);
 })->name('booking');
 
-Route::get('/admin', function () {
-    return view('admin', [
-        'title' => 'Admin Dashboard',
-        'navType' => 'admin',
-        'features' => [
-            'View all bookings',
-            'Approve or reject appointments',
-            'Manage user records',
-        ],
-    ]);
-})->name('admin.dashboard');
+Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+
+// Admin bookings management
+Route::get('/admin/bookings', [AdminController::class, 'bookings'])->name('admin.bookings');
+Route::post('/admin/bookings/{booking}/approve', [AdminController::class, 'approveBooking'])->name('admin.bookings.approve');
+Route::post('/admin/bookings/{booking}/reject', [AdminController::class, 'rejectBooking'])->name('admin.bookings.reject');
+
+// Admin user management
+Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users');
+Route::get('/admin/users/{user}', [AdminController::class, 'userDetails'])->name('admin.user-details');
+Route::delete('/admin/users/{user}', [AdminController::class, 'deleteUser'])->name('admin.users.delete');
 
 Route::get('/about', function () {
     return view('about', [

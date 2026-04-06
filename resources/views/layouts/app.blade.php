@@ -79,6 +79,114 @@
             margin: 0 auto;
         }
 
+        .auth-card {
+            max-width: 420px;
+            margin: 40px auto;
+            padding: 36px 32px;
+            background: #ffffff;
+            border-radius: 28px;
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+            text-align: center;
+        }
+
+        .auth-card h1 {
+            margin-bottom: 18px;
+            font-size: 2rem;
+            color: #1a202c;
+        }
+
+        .auth-card p {
+            margin-bottom: 28px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .action-group {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 12px;
+        }
+
+        .button-link,
+        .auth-card button {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 999px;
+            border: none;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.98rem;
+            transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+        }
+
+        .button-link {
+            background: #3f6f4a;
+            color: #fff;
+        }
+
+        .button-link:hover,
+        .auth-card button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            margin-bottom: 18px;
+            text-align: left;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 16px;
+            border: 1px solid #d1d5db;
+            background: #f8fafc;
+            font-size: 1rem;
+            color: #111827;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #3f6f4a;
+            box-shadow: 0 0 0 4px rgba(63, 111, 74, 0.12);
+        }
+
+        .auth-card button.submit-button {
+            background: #3f6f4a;
+            color: #fff;
+            margin-top: 6px;
+        }
+
+        .auth-card .small-link {
+            margin-top: 14px;
+            color: #4b5563;
+            font-size: 0.95rem;
+        }
+
+        .auth-card .small-link a {
+            color: #3f6f4a;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .auth-card .small-link a:hover {
+            text-decoration: underline;
+        }
+
         /* SECTIONS */
         .section {
             width: 100%;

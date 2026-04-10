@@ -14,7 +14,11 @@
                     id="{{ $field['name'] }}"
                     name="{{ $field['name'] }}"
                     placeholder="{{ $field['placeholder'] }}"
+                    value="{{ old($field['name']) }}"
                 >
+                @error($field['name'])
+                    <div style="color: #b91c1c; margin-top: 6px;">{{ $message }}</div>
+                @enderror
             </div>
         @endforeach
 

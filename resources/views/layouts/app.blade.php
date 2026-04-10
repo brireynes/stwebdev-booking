@@ -69,6 +69,69 @@
             background: #45a049;
         }
 
+        .profile-menu {
+            position: relative;
+        }
+
+        .profile-toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            color: #fff;
+            background: #4caf50;
+            cursor: pointer;
+            font-weight: 700;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .profile-toggle:hover {
+            background: #45a049;
+            transform: translateY(-1px);
+        }
+
+        .profile-dropdown {
+            position: absolute;
+            right: 0;
+            top: calc(100% + 12px);
+            width: 200px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+            z-index: 20;
+        }
+
+        .profile-dropdown.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .profile-dropdown a {
+            display: block;
+            padding: 14px 18px;
+            color: #111827;
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .profile-dropdown a:last-child {
+            border-bottom: none;
+        }
+
+        .profile-dropdown a:hover {
+            background: #f8fafc;
+        }
+
         /* MAIN */
         main {
             padding: 24px;
@@ -211,6 +274,267 @@
             min-height: 500px;
         }
 
+        .page-header-section {
+            padding: 40px 30px;
+            background: linear-gradient(135deg, #3f6f4a 0%, #2e5f3b 100%);
+            color: #fff;
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+
+        .page-header-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .page-header-section p {
+            color: #e8f4e8;
+            max-width: 760px;
+            line-height: 1.7;
+        }
+
+        .services-grid,
+        .package-grid {
+            display: grid;
+            gap: 24px;
+        }
+
+        .services-grid {
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            margin-bottom: 40px;
+        }
+
+        .service-card,
+        .package-card,
+        .promo-card,
+        .service-detail-card {
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 16px 35px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+        }
+
+        .service-card {
+            display: flex;
+            flex-direction: column;
+            min-height: 320px;
+        }
+
+        .service-card-image {
+            min-height: 160px;
+            background: linear-gradient(120deg, #4caf50 0%, #2e7d32 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 0.04em;
+        }
+
+        .service-card-body {
+            flex: 1;
+            padding: 24px;
+        }
+
+        .service-card-body h2 {
+            margin-bottom: 12px;
+            font-size: 1.35rem;
+        }
+
+        .service-card-body p {
+            margin-bottom: 18px;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .service-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #2e7d32;
+        }
+
+        .service-card-footer {
+            padding: 24px;
+            text-align: center;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            border-radius: 999px;
+            padding: 12px 24px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 22px rgba(0, 0, 0, 0.15);
+        }
+
+        .button-primary {
+            background: #4caf50;
+            color: #fff;
+        }
+
+        .button-secondary {
+            background: #e5e7eb;
+            color: #111;
+        }
+
+        .package-section,
+        .promo-section,
+        .service-detail-section {
+            margin-bottom: 40px;
+        }
+
+        .package-section h2,
+        .promo-section h2 {
+            margin-bottom: 18px;
+            font-size: 2rem;
+            color: #1f2937;
+        }
+
+        .package-grid {
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        }
+
+        .package-card {
+            padding: 24px;
+        }
+
+        .package-card h3 {
+            margin-bottom: 8px;
+            font-size: 1.25rem;
+        }
+
+        .package-card span {
+            display: inline-block;
+            margin-bottom: 16px;
+            color: #4b5563;
+            font-size: 0.95rem;
+        }
+
+        .package-card p {
+            margin-bottom: 18px;
+            color: #4b5563;
+            line-height: 1.75;
+        }
+
+        .package-price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .promo-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .promo-track-container {
+            overflow: hidden;
+        }
+
+        .promo-track {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding-bottom: 10px;
+        }
+
+        .promo-card {
+            padding: 28px 24px;
+            min-width: 280px;
+            border: 1px solid #e5e7eb;
+            background: #fff;
+        }
+
+        .promo-card h3 {
+            margin-bottom: 12px;
+        }
+
+        .promo-card p {
+            color: #4b5563;
+            line-height: 1.7;
+        }
+
+        .promo-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .promo-button {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: none;
+            background: #111827;
+            color: #fff;
+            font-size: 1.25rem;
+            cursor: pointer;
+        }
+
+        .service-detail-card {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 32px;
+            padding: 30px;
+            align-items: center;
+        }
+
+        .service-detail-image {
+            min-height: 300px;
+            background: linear-gradient(135deg, #4caf50 0%, #81c784 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 800;
+            font-size: 1.2rem;
+            border-radius: 20px;
+        }
+
+        .service-detail-price {
+            margin-bottom: 18px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1f433d;
+        }
+
+        .detail-actions {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-top: 24px;
+        }
+
+        .empty-state {
+            padding: 40px;
+            background: #fff;
+            border-radius: 24px;
+            text-align: center;
+        }
+
+        .empty-state h2 {
+            margin-bottom: 12px;
+        }
+
+        .empty-state p {
+            color: #4b5563;
+        }
+
         /* CARDS (SECTION 2) */
         .cards-container {
             display: flex;
@@ -317,7 +641,7 @@
 <header>
     <nav class="navbar">
         @php
-            $navigationType = $navType ?? 'guest';
+            $navigationType = $navType ?? (isset($authUser) && $authUser ? 'user' : 'guest');
         @endphp
 
         <div class="nav-left">
@@ -327,10 +651,12 @@
         <div class="nav-center">
             @if ($navigationType === 'guest')
                 <a href="{{ route('welcome') }}">Home</a>
+                <a href="{{ route('services') }}">Services</a>
                 <a href="{{ route('booking') }}">Book</a>
                 <a href="#">About</a>
             @elseif ($navigationType === 'user')
                 <a href="{{ route('user.home') }}">Home</a>
+                <a href="{{ route('services') }}">Services</a>
                 <a href="{{ route('booking') }}">Booking</a>
             @elseif ($navigationType === 'admin')
                 <a href="{{ route('admin.dashboard') }}">Admin Panel</a>
@@ -340,6 +666,17 @@
         <div class="nav-right">
             @if ($navigationType === 'guest')
                 <a href="{{ route('login.choice') }}" class="btn-login">Login</a>
+            @elseif ($navigationType === 'user' && isset($authUser))
+                <div class="profile-menu">
+                    <span class="profile-name">Hi, {{ explode(' ', $authUser->name)[0] }}</span>
+                    <button type="button" class="profile-toggle" id="profileToggle">{{ strtoupper(substr($authUser->name, 0, 1)) }}</button>
+                    <div class="profile-dropdown" id="profileDropdown">
+                        <a href="{{ route('profile.edit') }}">Edit profile</a>
+                        <a href="{{ route('profile.password') }}">Change password</a>
+                        <a href="{{ route('profile.history') }}">Booking history</a>
+                        <a href="{{ route('logout') }}">Logout</a>
+                    </div>
+                </div>
             @else
                 <a href="{{ route('welcome') }}">Logout</a>
             @endif
@@ -351,7 +688,21 @@
 <main>
     <div class="page-container">
 
-        @yield('content')
+            @if (session('status'))
+                <div class="auth-card" style="background: #e6ffed; color: #1f433d; border: 1px solid #bbf7d0; margin-bottom: 20px;">
+                    {{ session('status') }}
+                </div>
+            @endif
+
+            @if ($errors->any())
+                <div class="auth-card" style="background: #ffe4e6; color: #991b1b; border: 1px solid #fecdd3; margin-bottom: 20px;">
+                    <ul style="list-style: none; padding-left: 0; margin: 0;">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
         {{-- SHOW SECTIONS ONLY IF NOT LOGIN OR REGISTER PAGES --}}
        @php
@@ -361,11 +712,13 @@
         'login',
         'user.login',
         'admin.login',
-        'booking',          // ✅ added
-        'admin.dashboard',  // ✅ added
-        'user.home',        // ✅ added
-        'admin.users',        // ✅ added
-        'admin.bookings',     // ✅ added
+        'booking',
+        'services',
+        'service.show',
+        'admin.dashboard',
+        'user.home',
+        'admin.users',
+        'admin.bookings',
     ];
 @endphp
 
@@ -444,6 +797,25 @@
         <p>© {{ date('Y') }} Booking System. All rights reserved.</p>
     </div>
 </footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const toggle = document.getElementById('profileToggle');
+        const dropdown = document.getElementById('profileDropdown');
+
+        if (toggle && dropdown) {
+            toggle.addEventListener('click', function () {
+                dropdown.classList.toggle('open');
+            });
+
+            document.addEventListener('click', function (event) {
+                if (!toggle.contains(event.target) && !dropdown.contains(event.target)) {
+                    dropdown.classList.remove('open');
+                }
+            });
+        }
+    });
+</script>
 
 </body>
 </html>

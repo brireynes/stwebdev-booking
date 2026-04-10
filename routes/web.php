@@ -1,6 +1,11 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ServiceController;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -13,7 +18,7 @@ Route::get('/', function () {
 Route::get('/register', function () {
     return view('register', [
         'title' => 'User Registration',
-        'formAction' => '#',
+        'formAction' => route('register.submit'),
         'submitLabel' => 'Register',
         'fields' => [
             [
@@ -27,6 +32,12 @@ Route::get('/register', function () {
                 'name' => 'email',
                 'type' => 'email',
                 'placeholder' => 'Enter your email',
+            ],
+            [
+                'label' => 'Contact Number',
+                'name' => 'contact',
+                'type' => 'text',
+                'placeholder' => 'Enter your contact number',
             ],
             [
                 'label' => 'Password',
@@ -43,6 +54,27 @@ Route::get('/register', function () {
         ],
     ]);
 })->name('register');
+
+Route::post('/register', function (Request $request) {
+    $data = $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|max:255|unique:users,email',
+        'contact' => 'nullable|string|max:255',
+        'password' => 'required|string|min:8|confirmed',
+    ]);
+
+    $user = User::create([
+        'name' => $data['name'],
+        'email' => $data['email'],
+        'contact' => $data['contact'] ?? null,
+        'password' => Hash::make($data['password']),
+    ]);
+
+    Auth::login($user);
+    $request->session()->regenerate();
+
+    return redirect()->route('user.home');
+})->name('register.submit');
 
 Route::get('/login', function () {
     return view('login-choice', [
@@ -64,7 +96,7 @@ Route::get('/login', function () {
 Route::get('/login/user', function () {
     return view('login', [
         'title' => 'User Login',
-        'formAction' => route('user.home'),
+        'formAction' => route('user.login.submit'),
         'submitLabel' => 'Login as User',
         'fields' => [
             [
@@ -82,6 +114,20 @@ Route::get('/login/user', function () {
         ],
     ]);
 })->name('user.login');
+
+Route::post('/login/user', function (Request $request) {
+    $credentials = $request->validate([
+        'email' => 'required|email',
+        'password' => 'required|string',
+    ]);
+
+    if (Auth::attempt($credentials)) {
+        $request->session()->regenerate();
+        return redirect()->intended(route('user.home'));
+    }
+
+    return back()->withErrors(['email' => 'The provided credentials do not match our records.'])->onlyInput('email');
+})->name('user.login.submit');
 
 Route::get('/login/admin', function () {
     return view('login', [
@@ -106,17 +152,25 @@ Route::get('/login/admin', function () {
 })->name('admin.login');
 
 Route::get('/home', function () {
+    if (!Auth::check()) {
+        return redirect()->route('user.login');
+    }
+
     return view('home', [
         'title' => 'User Home',
         'description' => 'Welcome to the user dashboard.',
-        'navType' => 'user',
     ]);
 })->name('user.home');
 
 Route::get('/booking', function () {
+    if (!Auth::check()) {
+        return redirect()->route('user.login');
+    }
+
+    $defaultService = request()->query('service', '');
+
     return view('booking', [
         'title' => 'Booking Page',
-        'navType' => 'user',
         'formAction' => '#',
         'submitLabel' => 'Submit Booking',
         'fields' => [
@@ -125,6 +179,7 @@ Route::get('/booking', function () {
                 'name' => 'service',
                 'type' => 'text',
                 'placeholder' => 'Enter selected service',
+                'value' => $defaultService,
             ],
             [
                 'label' => 'Appointment Date',
@@ -141,6 +196,83 @@ Route::get('/booking', function () {
         ],
     ]);
 })->name('booking');
+
+Route::get('/profile', function () {
+    if (!Auth::check()) {
+        return redirect()->route('user.login');
+    }
+
+    return view('profile.edit', [
+        'title' => 'Edit Profile',
+    ]);
+})->name('profile.edit');
+
+Route::post('/profile/update', function (Request $request) {
+    if (!Auth::check()) {
+        return redirect()->route('user.login');
+    }
+
+    $data = $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|max:255|unique:users,email,' . Auth::id(),
+        'contact' => 'nullable|string|max:255',
+    ]);
+
+    Auth::user()->update($data);
+
+    return redirect()->route('profile.edit')->with('status', 'Profile updated successfully.');
+})->name('profile.update');
+
+Route::get('/profile/password', function () {
+    if (!Auth::check()) {
+        return redirect()->route('user.login');
+    }
+
+    return view('profile.password', [
+        'title' => 'Change Password',
+    ]);
+})->name('profile.password');
+
+Route::post('/profile/password', function (Request $request) {
+    if (!Auth::check()) {
+        return redirect()->route('user.login');
+    }
+
+    $data = $request->validate([
+        'current_password' => 'required|string',
+        'password' => 'required|string|min:8|confirmed',
+    ]);
+
+    if (!Hash::check($data['current_password'], Auth::user()->password)) {
+        return back()->withErrors(['current_password' => 'Your current password is incorrect.']);
+    }
+
+    Auth::user()->update(['password' => Hash::make($data['password'])]);
+
+    return redirect()->route('profile.password')->with('status', 'Password changed successfully.');
+})->name('profile.password.submit');
+
+Route::get('/profile/bookings', function () {
+    if (!Auth::check()) {
+        return redirect()->route('user.login');
+    }
+
+    return view('profile.history', [
+        'title' => 'Booking History',
+        'bookings' => Auth::user()->bookings()->latest()->get(),
+    ]);
+})->name('profile.history');
+
+Route::get('/logout', function (Request $request) {
+    Auth::logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+
+    return redirect()->route('welcome');
+})->name('logout');
+
+Route::get('/services', [ServiceController::class, 'index'])->name('services');
+Route::get('/service/{service}', [ServiceController::class, 'show'])->name('service.show');
 
 Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 

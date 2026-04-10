@@ -14,6 +14,7 @@
                     id="{{ $field['name'] }}"
                     name="{{ $field['name'] }}"
                     placeholder="{{ $field['placeholder'] }}"
+                    value="{{ old($field['name'], $field['value'] ?? '') }}"
                 >
             </div>
         @endforeach

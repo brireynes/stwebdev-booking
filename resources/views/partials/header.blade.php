@@ -6,8 +6,9 @@
 
         <a href="/">Home</a>
         <a href="/services">Services</a>
-        <a href="/packages">Packages</a>
+        <a href="/packages">Package</a>
         <a href="/promos">Promos</a>
+        <a href="/booking">Contact</a>
         <a href="/booking">Booking</a>
 
     </nav>

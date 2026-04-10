@@ -132,7 +132,7 @@ Route::post('/login/user', function (Request $request) {
 Route::get('/login/admin', function () {
     return view('login', [
         'title' => 'Admin Login',
-        'formAction' => route('admin.dashboard'),
+        'formAction' => route('admin.login.submit'),
         'submitLabel' => 'Login as Admin',
         'fields' => [
             [
@@ -150,6 +150,20 @@ Route::get('/login/admin', function () {
         ],
     ]);
 })->name('admin.login');
+
+Route::post('/login/admin', function (Request $request) {
+    $credentials = $request->validate([
+        'email' => 'required|email',
+        'password' => 'required|string',
+    ]);
+
+    if (Auth::attempt($credentials)) {
+        $request->session()->regenerate();
+        return redirect()->intended(route('admin.dashboard'));
+    }
+
+    return back()->withErrors(['email' => 'The provided credentials do not match our records.'])->onlyInput('email');
+})->name('admin.login.submit');
 
 Route::get('/home', function () {
     if (!Auth::check()) {
@@ -274,17 +288,63 @@ Route::get('/logout', function (Request $request) {
 Route::get('/services', [ServiceController::class, 'index'])->name('services');
 Route::get('/service/{service}', [ServiceController::class, 'show'])->name('service.show');
 
-Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+Route::get('/admin', function () {
+    if (!Auth::check()) {
+        return redirect()->route('admin.login');
+    }
+
+    return app(AdminController::class)->dashboard();
+})->name('admin.dashboard');
 
 // Admin bookings management
-Route::get('/admin/bookings', [AdminController::class, 'bookings'])->name('admin.bookings');
-Route::post('/admin/bookings/{booking}/approve', [AdminController::class, 'approveBooking'])->name('admin.bookings.approve');
-Route::post('/admin/bookings/{booking}/reject', [AdminController::class, 'rejectBooking'])->name('admin.bookings.reject');
+Route::get('/admin/bookings', function () {
+    if (!Auth::check()) {
+        return redirect()->route('admin.login');
+    }
+
+    return app(AdminController::class)->bookings();
+})->name('admin.bookings');
+
+Route::post('/admin/bookings/{booking}/approve', function ($booking) {
+    if (!Auth::check()) {
+        return redirect()->route('admin.login');
+    }
+
+    return app(AdminController::class)->approveBooking($booking);
+})->name('admin.bookings.approve');
+
+Route::post('/admin/bookings/{booking}/reject', function ($booking) {
+    if (!Auth::check()) {
+        return redirect()->route('admin.login');
+    }
+
+    return app(AdminController::class)->rejectBooking($booking);
+})->name('admin.bookings.reject');
 
 // Admin user management
-Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users');
-Route::get('/admin/users/{user}', [AdminController::class, 'userDetails'])->name('admin.user-details');
-Route::delete('/admin/users/{user}', [AdminController::class, 'deleteUser'])->name('admin.users.delete');
+Route::get('/admin/users', function () {
+    if (!Auth::check()) {
+        return redirect()->route('admin.login');
+    }
+
+    return app(AdminController::class)->users();
+})->name('admin.users');
+
+Route::get('/admin/users/{user}', function ($user) {
+    if (!Auth::check()) {
+        return redirect()->route('admin.login');
+    }
+
+    return app(AdminController::class)->userDetails($user);
+})->name('admin.user-details');
+
+Route::delete('/admin/users/{user}', function ($user) {
+    if (!Auth::check()) {
+        return redirect()->route('admin.login');
+    }
+
+    return app(AdminController::class)->deleteUser($user);
+})->name('admin.users.delete');
 
 Route::get('/about', function () {
     return view('about', [

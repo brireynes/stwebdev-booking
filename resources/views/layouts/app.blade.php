@@ -704,6 +704,8 @@
                 </div>
             @endif
 
+            @yield('content')
+
         {{-- SHOW SECTIONS ONLY IF NOT LOGIN OR REGISTER PAGES --}}
        @php
     $hideSectionsRoutes = [

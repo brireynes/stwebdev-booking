@@ -12,3 +12,7 @@ Route::get('/booking', [BookingController::class, 'index'])
 
 Route::post('/booking', [BookingController::class, 'store'])
     ->name('booking.store');
+
+Route::get('/admin', function () {
+    return view('admin.dashboard');
+});

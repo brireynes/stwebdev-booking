@@ -1,12 +1,19 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin - Bong's Salon</title>
+</head>
+<body>
 
-@section('content')
-    <h1>{{ $title }}</h1>
-    @include('partials.header')
-    <ul>
-        @foreach ($features as $feature)
-            <li>{{ $feature }}</li>
-        @endforeach
-    </ul>
-    @include('partials.footer')
-@endsection
+@include('partials.header')
+
+<h2>Admin Panel</h2>
+
+<div>
+    @yield('content')
+</div>
+
+@include('partials.footer')
+
+</body>
+</html>

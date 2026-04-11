@@ -11,7 +11,6 @@ class Booking extends Model
     'service_id',
     'date',
     'time',
-    'stylist',
     'status'
     ];
 }

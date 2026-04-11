@@ -47,15 +47,15 @@
 
     @stack('styles')
 </head>
-<body class="text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container min-h-screen">
+<body class="text-on-surface font-body selection:bg-primary-container selection:text-on-primary min-h-screen flex flex-col bg-background">
 
-    {{-- Stitch Header Partial --}}
     @include('partials.header')
 
-    {{-- Page Content --}}
-    <main>
+    <main class="flex-1">
         @yield('content')
     </main>
+
+    @include('partials.footer')
 
     @stack('scripts')
 </body>

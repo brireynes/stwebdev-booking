@@ -20,8 +20,6 @@ return new class extends Migration
             $table->date('date');
             $table->time('time');
         
-            $table->string('stylist');
-        
             $table->string('status')->default('pending');
         
             $table->timestamps();        

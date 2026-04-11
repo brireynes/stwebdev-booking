@@ -2,35 +2,36 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Service;
+use Illuminate\Http\Request;
 
 class BookingController extends Controller
 {
     public function index()
     {
         $services = Service::all();
-
-        return view('user.booking', compact('services'));
+        return view('booking.index', compact('services'));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'service_id' => 'required',
-            'booking_date' => 'required',
-            'booking_time' => 'required',
+        $validated = $request->validate([
+            'service_id' => 'required|exists:services,id',
+            'date' => 'required|date',
+            'time' => 'required',
         ]);
 
         Booking::create([
-            'user_id' => 1,
-            'service_id' => $request->service_id,
-            'booking_date' => $request->booking_date,
-            'booking_time' => $request->booking_time,
-            'notes' => $request->notes,
+            'user_id' => auth()->id() ?? 1,
+            'service_id' => $validated['service_id'],
+            'date' => $validated['date'],
+            'time' => $validated['time'],
+            'status' => 'pending',
         ]);
 
-        return redirect('/booking')->with('success', 'Booking Successful!');
+        return redirect()
+            ->route('bookings.index')
+            ->with('success', 'Booking successful!');
     }
 }

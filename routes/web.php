@@ -25,6 +25,10 @@ Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
+
 // Booking
 Route::get('/booking', [BookingController::class, 'index'])->name('bookings.index');
 Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
@@ -32,7 +36,7 @@ Route::post('/booking', [BookingController::class, 'store'])->name('booking.stor
 // Admin
 Route::get('/admin', function () {
     return view('admin.dashboard');
-});
+})->name('admin.dashboard');
 
 // Auth protected
 Route::middleware('auth')->group(function () {

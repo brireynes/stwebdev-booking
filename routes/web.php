@@ -3,16 +3,40 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookingController;
 
+// Home
 Route::get('/', function () {
     return view('home');
-});
+})->name('home');
 
-Route::get('/booking', [BookingController::class, 'index'])
-    ->name('booking.index');
+// Public pages
+Route::get('/services', function () {
+    return view('services');
+})->name('services.index');
 
-Route::post('/booking', [BookingController::class, 'store'])
-    ->name('booking.store');
+Route::get('/packages', function () {
+    return view('packages');
+})->name('packages.index');
 
+Route::get('/promos', function () {
+    return view('promos');
+})->name('promos.index');
+
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
+
+// Booking
+Route::get('/booking', [BookingController::class, 'index'])->name('bookings.index');
+Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
+
+// Admin
 Route::get('/admin', function () {
     return view('admin.dashboard');
+});
+
+// Auth protected
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', function () {
+        return view('profile.edit');
+    })->name('profile.edit');
 });

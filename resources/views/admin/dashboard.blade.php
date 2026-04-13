@@ -1,100 +1,111 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Bong's Salon</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
+@extends('layouts.admin')
 
-<body class="bg-stone-900 text-white">
+@section('title', 'Dashboard')
 
-<div class="flex min-h-screen">
+@section('content')
 
-    <!-- Sidebar -->
-    <aside class="w-64 bg-stone-800 p-6">
-        <h2 class="text-2xl font-bold text-yellow-600 mb-8">Admin Panel</h2>
+<!-- Header -->
+<div class="mb-6">
+    <h1 class="text-3xl font-bold">Dashboard Overview</h1>
+    <p class="text-gray-600">Welcome to Bong's Salon Admin Panel</p>
+</div>
 
-        <nav class="space-y-4">
-            <a href="/admin/dashboard" class="block hover:text-yellow-600">Dashboard</a>
-            <a href="/admin/services" class="block hover:text-yellow-600">Services</a>
-            <a href="/admin/bookings" class="block hover:text-yellow-600">Bookings</a>
-            <a href="/admin/users" class="block hover:text-yellow-600">Users</a>
-            <a href="/admin/packages" class="block hover:text-yellow-600">Packages</a>
-            <a href="/admin/promos" class="block hover:text-yellow-600">Promos</a>
-        </nav>
-    </aside>
+<!-- Stats -->
+<div class="grid md:grid-cols-3 gap-6 mb-8">
 
-    <!-- Main Content -->
-    <main class="flex-1 p-8">
+    <div class="bg-white border p-6 rounded-xl shadow-sm">
+        <h2 class="text-sm text-gray-500">Total Users</h2>
+        <p class="text-3xl font-bold text-black mt-2">
+            0 <!-- backend: User::count() -->
+        </p>
+    </div>
 
-        <!-- Header -->
-        <div class="mb-6">
-            <h1 class="text-3xl font-bold">Dashboard Overview</h1>
-            <p class="text-gray-400">Welcome to Bong's Salon Admin Panel</p>
-        </div>
+    <div class="bg-white border p-6 rounded-xl shadow-sm">
+        <h2 class="text-sm text-gray-500">Total Bookings</h2>
+        <p class="text-3xl font-bold text-black mt-2">
+            0 <!-- backend: Booking::count() -->
+        </p>
+    </div>
 
-        <!-- Stats -->
-        <div class="grid md:grid-cols-3 gap-6 mb-8">
-
-            <!-- Total Users -->
-            <div class="bg-stone-800 p-6 rounded-2xl shadow">
-                <h2 class="text-sm text-gray-400">Total Users</h2>
-
-                <!-- 🔽 BACKEND: Replace with dynamic value -->
-                <!-- Controller should pass: $totalUsers -->
-                <p class="text-3xl font-bold text-yellow-600 mt-2">
-                    {{ $totalUsers ?? 0 }}
-                </p>
-            </div>
-
-            <!-- Total Bookings -->
-            <div class="bg-stone-800 p-6 rounded-2xl shadow">
-                <h2 class="text-sm text-gray-400">Total Bookings</h2>
-
-                <!-- 🔽 BACKEND: Replace with dynamic value -->
-                <!-- Controller should pass: $totalBookings -->
-                <p class="text-3xl font-bold text-yellow-600 mt-2">
-                    {{ $totalBookings ?? 0 }}
-                </p>
-            </div>
-
-            <!-- Total Services -->
-            <div class="bg-stone-800 p-6 rounded-2xl shadow">
-                <h2 class="text-sm text-gray-400">Total Services</h2>
-
-                <!-- 🔽 BACKEND: Replace with dynamic value -->
-                <!-- Controller should pass: $totalServices -->
-                <p class="text-3xl font-bold text-yellow-600 mt-2">
-                    {{ $totalServices ?? 0 }}
-                </p>
-            </div>
-
-        </div>
-
-        <!-- Overview -->
-        <div class="bg-stone-800 rounded-2xl p-6 shadow mb-6">
-            <h2 class="text-xl font-semibold text-yellow-600 mb-4">
-                Dashboard Overview
-            </h2>
-
-            <p class="text-gray-300 leading-relaxed">
-                This dashboard provides a quick overview of your salon system. 
-                You can monitor total users, track bookings, and manage services efficiently. 
-                Use the sidebar to navigate through different sections such as packages and promos.
-            </p>
-        </div>
-
-        <!-- Dynamic Page Content -->
-        <!-- 🔽 BACKEND: Other admin pages will load here -->
-        <!-- Example: services, bookings, users, etc. -->
-        <div>
-            @yield('content')
-        </div>
-
-    </main>
+    <div class="bg-white border p-6 rounded-xl shadow-sm">
+        <h2 class="text-sm text-gray-500">Total Services</h2>
+        <p class="text-3xl font-bold text-black mt-2">
+            0 <!-- backend: Service::count() -->
+        </p>
+    </div>
 
 </div>
 
-</body>
-</html>
+<!-- Overview -->
+<div class="bg-white border rounded-xl p-6 shadow-sm mb-6">
+    <h2 class="text-xl font-semibold mb-4">
+        Dashboard Overview
+    </h2>
+
+    <p class="text-gray-600 leading-relaxed">
+        This dashboard provides a quick overview of your salon system.
+        You can monitor total users, track bookings, and manage services efficiently.
+        Use the sidebar to navigate through different sections such as bookings, services, and users.
+    </p>
+</div>
+
+<!-- Recent Bookings -->
+<div class="bg-white border rounded-xl p-6 shadow-sm mb-6">
+
+    <h2 class="text-xl font-semibold mb-4">
+        Recent Bookings
+    </h2>
+
+    <div class="overflow-x-auto">
+        <table class="w-full text-sm text-left">
+
+            <thead class="text-gray-500 border-b">
+                <tr>
+                    <th class="py-3 px-2">User</th>
+                    <th class="py-3 px-2">Service</th>
+                    <th class="py-3 px-2">Date</th>
+                    <th class="py-3 px-2">Time</th>
+                    <th class="py-3 px-2">Status</th>
+                </tr>
+            </thead>
+
+            <tbody class="text-gray-700">
+
+                {{-- foreach($recentBookings as $booking) --}}
+
+                <tr class="border-b hover:bg-gray-50">
+
+                    <td class="py-3 px-2">
+                        John Doe <!-- backend: $booking->user->name -->
+                    </td>
+
+                    <td class="py-3 px-2">
+                        Haircut <!-- backend: $booking->service->name -->
+                    </td>
+
+                    <td class="py-3 px-2">
+                        2026-04-13 <!-- backend: $booking->date -->
+                    </td>
+
+                    <td class="py-3 px-2">
+                        10:00 AM <!-- backend: $booking->time -->
+                    </td>
+
+                    <td class="py-3 px-2">
+                        <span class="px-3 py-1 rounded-full text-xs bg-yellow-100 text-yellow-700">
+                            Pending <!-- backend: $booking->status -->
+                        </span>
+                    </td>
+
+                </tr>
+
+                {{-- endforeach --}}
+
+            </tbody>
+
+        </table>
+    </div>
+
+</div>
+
+@endsection

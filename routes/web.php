@@ -29,12 +29,16 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
+Route::get('/login', function () {
+    return view('login');
+})->name('login');
+
 // Booking
 Route::get('/booking', [BookingController::class, 'index'])->name('bookings.index');
 Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
 
 // Admin
-Route::get('/admin', function () {
+Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
 })->name('admin.dashboard');
 

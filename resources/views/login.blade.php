@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>{{ $title }}</h1>
 
     <form method="GET" action="{{ $formAction }}">
         @foreach ($fields as $field)

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ServiceController;
 
 // Home
 Route::get('/', function () {
@@ -9,9 +10,9 @@ Route::get('/', function () {
 })->name('home');
 
 // Public pages
-Route::get('/services', function () {
-    return view('services');
-})->name('services.index');
+Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
+Route::get('/service/{service}', [ServiceController::class, 'show'])->name('services.show');
+Route::post('/cart/add', [ServiceController::class, 'addToCart'])->name('cart.add');
 
 Route::get('/packages', function () {
     return view('packages');

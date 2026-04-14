@@ -48,13 +48,14 @@
                             Service Selection
                         </h2>
 
-                        <label for="service_id" class="block mb-2">Choose Service</label>
+                        <label for="service_id" class="block mb-2 text-black">Choose Service</label>
 
                         <select
                             name="service_id"
                             id="service_id"
-                            class="w-full border p-3 rounded"
+                            class="w-full border p-3 rounded text-black"
                             required
+
                         >
                             <option value="" disabled {{ old('service_id') ? '' : 'selected' }}>
                                 Select a service
@@ -75,7 +76,7 @@
                             Schedule
                         </h2>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-black">
                             <div>
                                 <label for="date" class="block mb-2">Date</label>
                                 <input

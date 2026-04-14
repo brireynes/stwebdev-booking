@@ -57,9 +57,11 @@ Route::get('/booking', [BookingController::class, 'index'])->name('bookings.inde
 Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
 
 // Admin
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
-})->name('admin.dashboard');
+use App\Http\Controllers\AdminController;
+
+Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])
+    ->middleware(['auth', 'role:admin'])
+    ->name('admin.dashboard');
 
 // Auth protected
 Route::middleware('auth')->group(function () {
@@ -79,3 +81,4 @@ Route::post('/logout', function () {
 
     return redirect('/login');
 })->name('logout');
+

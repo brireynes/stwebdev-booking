@@ -13,4 +13,15 @@ class Booking extends Model
     'time',
     'status'
     ];
+
+     public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    // 👇 ADD THIS
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
 }

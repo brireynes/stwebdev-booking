@@ -13,24 +13,27 @@
 <!-- Stats -->
 <div class="grid md:grid-cols-3 gap-6 mb-8">
 
+    <!-- Users -->
     <div class="bg-white border p-6 rounded-xl shadow-sm">
         <h2 class="text-sm text-gray-500">Total Users</h2>
         <p class="text-3xl font-bold text-black mt-2">
-            0 <!-- backend: User::count() -->
+            {{ $totalUsers }}
         </p>
     </div>
 
+    <!-- Bookings -->
     <div class="bg-white border p-6 rounded-xl shadow-sm">
         <h2 class="text-sm text-gray-500">Total Bookings</h2>
         <p class="text-3xl font-bold text-black mt-2">
-            0 <!-- backend: Booking::count() -->
+            {{ $totalBookings }}
         </p>
     </div>
 
+    <!-- Services -->
     <div class="bg-white border p-6 rounded-xl shadow-sm">
         <h2 class="text-sm text-gray-500">Total Services</h2>
         <p class="text-3xl font-bold text-black mt-2">
-            0 <!-- backend: Service::count() -->
+            {{ $totalServices }}
         </p>
     </div>
 
@@ -45,7 +48,7 @@
     <p class="text-gray-600 leading-relaxed">
         This dashboard provides a quick overview of your salon system.
         You can monitor total users, track bookings, and manage services efficiently.
-        Use the sidebar to navigate through different sections such as bookings, services, and users.
+        Use the sidebar to navigate through bookings, services, and users.
     </p>
 </div>
 
@@ -57,6 +60,7 @@
     </h2>
 
     <div class="overflow-x-auto">
+
         <table class="w-full text-sm text-left">
 
             <thead class="text-gray-500 border-b">
@@ -71,39 +75,57 @@
 
             <tbody class="text-gray-700">
 
-                {{-- foreach($recentBookings as $booking) --}}
+                @forelse($recentBookings as $booking)
 
-                <tr class="border-b hover:bg-gray-50">
+                    <tr class="border-b hover:bg-gray-50">
 
-                    <td class="py-3 px-2">
-                        John Doe <!-- backend: $booking->user->name -->
-                    </td>
+                        <!-- User -->
+                        <td class="py-3 px-2">
+                            {{ $booking->user->name ?? 'Unknown User' }}
+                        </td>
 
-                    <td class="py-3 px-2">
-                        Haircut <!-- backend: $booking->service->name -->
-                    </td>
+                        <!-- Service -->
+                        <td class="py-3 px-2">
+                            {{ $booking->service->name ?? 'Unknown Service' }}
+                        </td>
 
-                    <td class="py-3 px-2">
-                        2026-04-13 <!-- backend: $booking->date -->
-                    </td>
+                        <!-- Date -->
+                        <td class="py-3 px-2">
+                            {{ $booking->date }}
+                        </td>
 
-                    <td class="py-3 px-2">
-                        10:00 AM <!-- backend: $booking->time -->
-                    </td>
+                        <!-- Time -->
+                        <td class="py-3 px-2">
+                            {{ $booking->time }}
+                        </td>
 
-                    <td class="py-3 px-2">
-                        <span class="px-3 py-1 rounded-full text-xs bg-yellow-100 text-yellow-700">
-                            Pending <!-- backend: $booking->status -->
-                        </span>
-                    </td>
+                        <!-- Status -->
+                        <td class="py-3 px-2">
+                            <span class="px-3 py-1 rounded-full text-xs
+                                {{ $booking->status === 'pending' ? 'bg-yellow-100 text-yellow-700' : '' }}
+                                {{ $booking->status === 'approved' ? 'bg-green-100 text-green-700' : '' }}
+                                {{ $booking->status === 'cancelled' ? 'bg-red-100 text-red-700' : '' }}
+                            ">
+                                {{ ucfirst($booking->status) }}
+                            </span>
+                        </td>
 
-                </tr>
+                    </tr>
 
-                {{-- endforeach --}}
+                @empty
+
+                    <tr>
+                        <td colspan="5" class="text-center py-6 text-gray-500">
+                            No bookings found
+                        </td>
+                    </tr>
+
+                @endforelse
 
             </tbody>
 
         </table>
+
     </div>
 
 </div>

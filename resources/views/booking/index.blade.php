@@ -59,6 +59,7 @@
                             <option value="" disabled {{ old('service_id') ? '' : 'selected' }}>
                                 Select a service
                             </option>
+                            
 
                             @foreach($services as $service)
                                 <option value="{{ $service->id }}" {{ old('service_id') == $service->id ? 'selected' : '' }}>

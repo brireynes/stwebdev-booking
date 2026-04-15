@@ -50,11 +50,13 @@ Route::get('/login', function () {
             ],
         ]
     ]);
-});
+})->name('login');
 
 // Booking
 Route::get('/booking', [BookingController::class, 'index'])->name('bookings.index');
-Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
+Route::post('/booking', [BookingController::class, 'store'])
+    ->name('booking.store')
+    ->middleware('auth');
 
 // Admin
 use App\Http\Controllers\AdminController;
@@ -62,6 +64,26 @@ use App\Http\Controllers\AdminController;
 Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])
     ->middleware(['auth', 'role:admin'])
     ->name('admin.dashboard');
+
+Route::get('/admin/users', [AdminController::class, 'users'])
+    ->middleware(['auth', 'role:admin'])
+    ->name('admin.users');
+
+Route::get('/admin/bookings', [AdminController::class, 'bookings'])
+    ->middleware(['auth', 'role:admin'])
+    ->name('admin.bookings');
+
+Route::post('/admin/bookings/{id}/status', [AdminController::class, 'updateStatus'])
+    ->middleware(['auth', 'role:admin'])
+    ->name('admin.bookings.status');
+
+Route::get('/admin/users', [AdminController::class, 'users'])
+    ->middleware(['auth', 'role:admin'])
+    ->name('admin.users');
+
+Route::delete('/admin/users/{id}', [AdminController::class, 'deleteUser'])
+    ->middleware(['auth', 'role:admin'])
+    ->name('admin.users.delete');
 
 // Auth protected
 Route::middleware('auth')->group(function () {

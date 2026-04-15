@@ -10,80 +10,70 @@
 </head>
 <body class="bg-gray-100">
 
-<div class="max-w-7xl mx-auto py-10 px-4">
-    <h1 class="text-3xl font-bold mb-6 text-white">Packages</h1>
+<!-- PACKAGES SECTION -->
+<div id="packages" class="max-w-7xl mx-auto px-6 py-16">
+    <h2 class="text-3xl font-bold text-yellow-600 mb-10 text-center">Packages</h2>
 
     <div class="grid md:grid-cols-3 gap-6">
 
-        <!-- Basic Package -->
-        <div class="bg-stone-800 rounded-2xl shadow p-6 flex flex-col">
-            
-            <div>
-                <h2 class="text-xl font-semibold mb-2 text-white">Basic Package</h2>
-                <p class="text-yellow-600 mb-4">Perfect for small events.</p>
-                <p class="text-2xl font-bold text-yellow-600 mb-4">₱2,000</p>
+        <!-- Basic -->
+        <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden flex flex-col">
 
-                <ul class="text-sm text-gray-300 mb-4 space-y-1">
-                    <li>✔ 2 Hours</li>
-                    <li>✔ Basic Setup</li>
-                </ul>
+            <div class="h-56 bg-gray-200 flex items-center justify-center">
+                <span class="text-gray-500 text-sm">Image</span>
             </div>
 
-            <button class="w-full bg-yellow-600 text-white py-2 rounded-lg hover:bg-yellow-700 mt-auto">
-                Book Now
-            </button>
+            <div class="p-6 flex flex-col flex-1">
+                <h2 class="text-xl font-semibold mb-2 text-black">Basic Package</h2>
+                <p class="text-gray-600 mb-4">Perfect for small events.</p>
+                <p class="text-2xl font-bold text-yellow-600 mb-6">₱2,000</p>
 
+                <button class="w-full bg-yellow-600 text-white py-2 rounded-lg hover:bg-yellow-700 mt-auto">
+                    Book Now
+                </button>
+            </div>
         </div>
 
-        <!-- Deluxe Package -->
-        <div class="bg-stone-800 rounded-2xl shadow p-6 flex flex-col ">
-            
-            <div>
-                <span class="text-xs bg-yellow-600 text-white px-2 py-1 rounded-full">Popular</span>
-                <h2 class="text-xl font-semibold mb-2 mt-2 text-white">Deluxe Package</h2>
-                <p class="text-yellow-600 mb-4">Best for medium-sized events.</p>
-                <p class="text-2xl font-bold text-yellow-600 mb-4">₱5,000</p>
+        <!-- Deluxe -->
+        <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden flex flex-col">
 
-                <ul class="text-sm text-gray-300 mb-4 space-y-1">
-                    <li>✔ 4 Hours Coverage</li>
-                    <li>✔ Full Setup</li>
-                    <li>✔ 2 Staff Assistance</li>
-                    <li>✔ Free Decorations</li>
-                </ul>
+            <div class="h-56 bg-gray-200 flex items-center justify-center">
+                <span class="text-gray-500 text-sm">Image</span>
             </div>
 
-            <button class="w-full bg-yellow-600 text-white py-2 rounded-lg hover:bg-yellow-700 mt-auto">
-                Book Now
-            </button>
+            <div class="p-6 flex flex-col flex-1">
+                <span class="text-xs bg-yellow-600 text-white px-2 py-1 rounded-full w-fit mb-2">Popular</span>
 
+                <h2 class="text-xl font-semibold mb-2 text-black">Deluxe Package</h2>
+                <p class="text-gray-600 mb-4">Best for medium-sized events.</p>
+                <p class="text-2xl font-bold text-yellow-600 mb-6">₱5,000</p>
+
+                <button class="w-full bg-yellow-600 text-white py-2 rounded-lg hover:bg-yellow-700 mt-auto">
+                    Book Now
+                </button>
+            </div>
         </div>
 
-        <!-- Prestige Package -->
-        <div class="bg-stone-800 rounded-2xl shadow p-6 flex flex-col">
-            
-            <div>
-                <h2 class="text-xl font-semibold mb-2 text-white">Prestige Package</h2>
-                <p class="text-yellow-600 mb-4">Perfect for large events.</p>
-                <p class="text-2xl font-bold text-yellow-600 mb-4">₱10,000</p>
+        <!-- Prestige -->
+        <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden flex flex-col">
 
-                <ul class="text-sm text-gray-300 mb-4 space-y-1">
-                    <li>✔ Full Day Coverage</li>
-                    <li>✔ Premium Setup</li>
-                    <li>✔ 3+ Staff Assistance</li>
-                    <li>✔ Free Decorations</li>
-                    <li>✔ Priority Support</li>
-                </ul>
+            <div class="h-56 bg-gray-200 flex items-center justify-center">
+                <span class="text-gray-500 text-sm">Image</span>
             </div>
 
-            <button class="w-full bg-yellow-600 text-white py-2 rounded-lg hover:bg-yellow-700 mt-auto">
-                Book Now
-            </button>
+            <div class="p-6 flex flex-col flex-1">
+                <h2 class="text-xl font-semibold mb-2 text-black">Prestige Package</h2>
+                <p class="text-gray-600 mb-4">Perfect for large events.</p>
+                <p class="text-2xl font-bold text-yellow-600 mb-6">₱10,000</p>
 
+                <button class="w-full bg-yellow-600 text-white py-2 rounded-lg hover:bg-yellow-700 mt-auto">
+                    Book Now
+                </button>
+            </div>
         </div>
 
     </div>
 </div>
-
 </body>
 </html>
 @endsection

@@ -16,17 +16,33 @@
                 <a href="{{ route('admin.dashboard') }}" class="block text-gray-700 hover:text-black">
                     Dashboard
                 </a>
-                <a href="#" class="block text-gray-700 hover:text-black">
+                <a href="{{ route('admin.bookings') }}" class="block text-gray-700 hover:text-black">
                     Bookings
                 </a>
                 <a href="#" class="block text-gray-700 hover:text-black">
                     Services
                 </a>
-                <a href="#" class="block text-gray-700 hover:text-black">
+                <a href="{{ route('admin.users') }}" class="block text-gray-700 hover:text-black">
                     Users
                 </a>
+
+                <div class="mt-10 border-t pt-4">
+
+    <form method="POST" action="{{ route('logout') }}">
+        @csrf
+
+        <button type="submit"
+            class="w-full text-left text-red-500 hover:text-red-700 font-medium transition">
+            Logout
+        </button>
+
+    </form>
+
+</div>
             </nav>
         </aside>
+
+        
 
         <main class="flex-1 p-8">
             @yield('content')

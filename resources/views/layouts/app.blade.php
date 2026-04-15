@@ -43,11 +43,13 @@
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
         }
+
+        
     </style>
 
     @stack('styles')
 </head>
-<body class="text-on-surface font-body selection:bg-primary-container selection:text-on-primary min-h-screen flex flex-col bg-background">
+<body class="text-black font-body selection:bg-yellow-300 selection:text-black min-h-screen flex flex-col bg-white">
 
     @include('partials.header')
 

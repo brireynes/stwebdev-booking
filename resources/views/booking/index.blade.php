@@ -11,9 +11,7 @@
                 Book an Appointment
             </h1>
 
-            <p class="text-gray-600 mt-3">
-                Schedule your salon service quickly and easily
-            </p>
+          
         </div>
 
         <!-- Success Message -->

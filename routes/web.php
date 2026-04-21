@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\AuthController;
 
 // Home
 Route::get('/', function () {
@@ -31,8 +33,24 @@ Route::get('/about', function () {
 })->name('about');
 
 Route::get('/login', function () {
-    return view('login');
-})->name('login');
+    return view('login', [
+        'formAction' => url('/login'),
+        'fields' => [
+            [
+                'name' => 'email',
+                'label' => 'Email',
+                'type' => 'email',
+                'placeholder' => 'Enter email'
+            ],
+            [
+                'name' => 'password',
+                'label' => 'Password',
+                'type' => 'password',
+                'placeholder' => 'Enter password'
+            ],
+        ]
+    ]);
+});
 
 // Booking
 Route::get('/booking', [BookingController::class, 'index'])->name('bookings.index');
@@ -49,3 +67,15 @@ Route::middleware('auth')->group(function () {
         return view('profile.edit');
     })->name('profile.edit');
 });
+
+
+Route::get('/register', [AuthController::class, 'showRegister']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', function () {
+    Auth::logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+
+    return redirect('/login');
+})->name('logout');

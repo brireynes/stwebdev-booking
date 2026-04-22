@@ -41,10 +41,16 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-    $request->session()->regenerate();
+            $request->session()->regenerate();
 
-    return redirect('/'); // user page
-}
+            // Redirect admin/super_admin to dashboard, users to home
+            $user = Auth::user();
+            if ($user->role === 'super_admin' || $user->role === 'admin') {
+                return redirect()->route('admin.dashboard');
+            }
+
+            return redirect('/');
+        }
 
         return back()->withErrors([
             'email' => 'Invalid email or password',

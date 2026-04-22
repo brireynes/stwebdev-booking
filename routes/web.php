@@ -56,10 +56,12 @@ Route::get('/login', function () {
 Route::get('/booking', [BookingController::class, 'index'])->name('bookings.index');
 Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
 
-// Admin
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
-})->name('admin.dashboard');
+// Admin - Protected by AdminOnly middleware
+Route::middleware(['auth', 'admin.only'])->group(function () {
+    Route::get('/admin/dashboard', [\App\Http\Controllers\AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/admin/create-admin', [\App\Http\Controllers\AdminController::class, 'createAdminForm'])->name('admin.create-form');
+    Route::post('/admin/create-admin', [\App\Http\Controllers\AdminController::class, 'storeAdmin'])->name('admin.create');
+});
 
 // Auth protected
 Route::middleware('auth')->group(function () {

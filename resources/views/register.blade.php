@@ -11,6 +11,42 @@
             Create Account
         </h1>
 
+        <!-- ✅ SUCCESS MESSAGE -->
+       <!-- SUCCESS MESSAGE -->
+@if(session('success'))
+    <div class="mb-4 p-3 rounded-lg bg-green-100 text-green-700 border border-green-300">
+        {{ session('success') }}
+    </div>
+@endif
+
+<!-- ERROR MESSAGE (from failed login) -->
+@if(session('error'))
+    <div class="mb-4 p-3 rounded-lg bg-red-100 text-red-700 border border-red-300">
+        {{ session('error') }}
+    </div>
+@endif
+
+<!-- VALIDATION / AUTH ERRORS -->
+@if($errors->any())
+    <div class="mb-4 p-3 rounded-lg bg-red-100 text-red-700 border border-red-300">
+        <ul class="list-disc pl-5">
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+        <!-- VALIDATION ERRORS -->
+        @if ($errors->any())
+            <div class="mb-4 p-3 rounded-lg bg-red-50 border border-red-200 text-red-600 text-sm">
+                <ul class="list-disc pl-5 space-y-1">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <!-- Form -->
         <form method="POST" action="{{ url('/register') }}" class="space-y-4">
             @csrf
@@ -19,6 +55,7 @@
             <div>
                 <label class="text-sm text-gray-700">Name</label>
                 <input type="text" name="name"
+                    value="{{ old('name') }}"
                     placeholder="Enter your name"
                     class="w-full mt-1 p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400">
             </div>
@@ -27,6 +64,7 @@
             <div>
                 <label class="text-sm text-gray-700">Email</label>
                 <input type="email" name="email"
+                    value="{{ old('email') }}"
                     placeholder="Enter your email"
                     class="w-full mt-1 p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400">
             </div>

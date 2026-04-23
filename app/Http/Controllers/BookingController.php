@@ -34,4 +34,31 @@ class BookingController extends Controller
             ->route('bookings.index')
             ->with('success', 'Booking successful!');
     }
+
+    public function create(Service $service)
+{
+     if (!auth()->check()) {
+        return redirect()->route('login')
+            ->with('error', 'You need to log in first to book an appointment.');
+    }
+    $services = Service::all();
+
+    if (!auth()->check()) {
+        return redirect('/login')
+            ->with('error', 'You must log in first before booking a service.');
+    }
+
+
+   return view('booking.index', compact('services', 'service'));
+}
+public function inventory()
+{
+    $bookings = Booking::with('service')
+        ->where('user_id', auth()->id())
+        ->latest()
+        ->get();
+
+    return view('inventory.index', compact('bookings'));
+}
+
 }

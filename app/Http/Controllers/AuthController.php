@@ -15,22 +15,34 @@ class AuthController extends Controller
         return view('register');
     }
 
-    public function register(Request $request)
+   public function register(Request $request)
     {
+        // ✅ Validate first
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6'
         ]);
 
-      User::create([
-    'name' => $request->name,
-    'email' => $request->email,
-    'password' => Hash::make($request->password),
-    'role' => 'user', // always user
-]);
+        try {
+            // ✅ Create user
+            User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role' => 'user',
+            ]);
 
-        return redirect('/login')->with('success', 'Account created successfully!');
+            // ✅ Success message
+            return redirect('/login')
+                ->with('success', 'Account created successfully! You can now login.');
+
+        } catch (\Exception $e) {
+            // ❌ Failed registration
+            return back()
+                ->withInput()
+                ->with('error', 'Registration failed. Please try again.');
+        }
     }
 
     public function login(Request $request)
@@ -56,4 +68,5 @@ class AuthController extends Controller
         'email' => 'Invalid email or password',
     ]);
 }
+
 }

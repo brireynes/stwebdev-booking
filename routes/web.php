@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\ServiceController;
+
+Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
+Route::get('/booking/{service}', [BookingController::class, 'create'])->name('booking.create');
 
 
 // Home
@@ -12,9 +16,7 @@ Route::get('/', function () {
 })->name('home');
 
 // Public pages
-Route::get('/services', function () {
-    return view('services');
-})->name('services.index');
+
 
 Route::get('/packages', function () {
     return view('packages');
@@ -104,3 +106,7 @@ Route::post('/logout', function () {
     return redirect('/login');
 })->name('logout');
 
+
+Route::get('/inventory', [BookingController::class, 'inventory'])
+    ->middleware('auth')
+    ->name('inventory.index');

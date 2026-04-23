@@ -2,6 +2,18 @@
 
 @section('content')
 
+@if(session('success'))
+    <div class="mb-4 p-3 rounded-lg bg-green-100 text-green-700 border border-green-300">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if(session('error'))
+    <div class="mb-4 p-3 rounded-lg bg-red-100 text-red-700 border border-red-300">
+        {{ session('error') }}
+    </div>
+@endif
+
 <div class="min-h-screen flex items-center justify-center bg-gray-100">
 
     <div class="w-full max-w-md bg-white p-8 rounded-2xl shadow-lg border border-yellow-200">

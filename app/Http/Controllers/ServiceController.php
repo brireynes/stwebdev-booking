@@ -20,7 +20,9 @@ class ServiceController extends Controller
             }
 
             Service::insert($defaultServices);
-            $services = Service::all();
+       $services = Service::where('type', 'service')->get();
+$packages = Service::where('type', 'package')->get();
+$promos = Service::where('type', 'promo')->get();
         }
 
         $packages = [
@@ -287,4 +289,6 @@ class ServiceController extends Controller
 
         return back()->with('success', "{$service->name} added to cart.");
     }
+
+    
 }

@@ -13,6 +13,76 @@ class ServiceSeeder extends Seeder
     public function run(): void
     {
         $services = [
+
+        // =========================
+            // 🎉 NEW PACKAGES (ADDED)
+            // =========================
+           [
+    'name' => 'Basic Package',
+    'description' => 'Perfect for small events.',
+    'price' => 2000,
+    'duration' => 120,
+    'type' => 'package',
+],
+
+[
+    'name' => 'Deluxe Package',
+    'description' => 'Best for medium-sized events.',
+    'price' => 5000,
+    'duration' => 180,
+    'type' => 'package',
+],
+[
+    'name' => 'Prestige Package',
+    'description' => 'Perfect for large events.',
+    'price' => 10000,
+    'duration' => 240,
+    'type' => 'package',
+],
+// =========================
+// 🎉 PROMOS (UPDATED)
+// =========================
+[
+    'name' => 'New Client Haircut Promo',
+    'description' => 'For new clients: Get 50% OFF on Haircut (original ₱100 → promo ₱50 only).',
+    'price' => 50,
+    'duration' => 30,
+    'type' => 'promo',
+],
+
+[
+    'name' => 'Weekend Manicure & Pedicure Deal',
+    'description' => 'Weekend special: Get Manicure or Pedicure for only ₱50 each.',
+    'price' => 50,
+    'duration' => 45,
+    'type' => 'promo',
+],
+
+[
+    'name' => 'Student Nail Care Discount',
+    'description' => 'Students get discounted Manicure or Pedicure for only ₱50. Valid student ID required.',
+    'price' => 50,
+    'duration' => 45,
+    'type' => 'promo',
+],
+
+    // PACKAGES
+    [
+        'name' => 'Basic Package',
+        'description' => 'Perfect for small events.',
+        'price' => 2000,
+        'duration' => 120,
+        'type' => 'package',
+    ],
+
+    [
+        'name' => 'Deluxe Package',
+        'description' => 'Best for medium-sized events.',
+        'price' => 5000,
+        'duration' => 180,
+        'type' => 'package',
+    ],
+
             [
                 'name' => 'Haircut',
                 'description' => 'A clean and professional haircut to refresh your style.',

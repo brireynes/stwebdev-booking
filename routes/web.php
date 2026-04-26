@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ServiceController;
 
 Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
-Route::get('/booking/{service}', [BookingController::class, 'create'])->name('booking.create');
+Route::get('/booking/{service}', [BookingController::class, 'create'])
+    ->name('booking.create')
+    ->middleware('auth');
 
 
 // Home

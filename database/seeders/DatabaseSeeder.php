@@ -2,24 +2,47 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // ✅ Super Admin (highest role)
+        User::firstOrCreate(
+            ['email' => 'test1@2'],
+            [
+                'name' => 'Super Admin',
+                'password' => Hash::make('123'),
+                'role' => 'super_admin',
+            ]
+        );
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        // ✅ Normal Admin (optional extra admin account)
+        User::firstOrCreate(
+            ['email' => 'admin@test.com'],
+            [
+                'name' => 'Admin User',
+                'password' => Hash::make('123'),
+                'role' => 'admin',
+            ]
+        );
+
+        // ✅ Regular Test User
+        User::firstOrCreate(
+            ['email' => 'test@example.com'],
+            [
+                'name' => 'Test User',
+                'password' => Hash::make('123456'),
+                'role' => 'user',
+            ]
+        );
+
+        // ✅ Seed services
+        $this->call([
+            ServiceSeeder::class,
         ]);
     }
 }

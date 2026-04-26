@@ -41,6 +41,7 @@ class BookingController extends Controller
         return redirect()->route('login')
             ->with('error', 'You need to log in first to book an appointment.');
     }
+    
     $services = Service::all();
 
     if (!auth()->check()) {

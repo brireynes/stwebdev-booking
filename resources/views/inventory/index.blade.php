@@ -5,7 +5,7 @@
 
     <!-- Header -->
     <div class="mb-8">
-        <h1 class="text-4xl font-bold text-gray-900">My Inventory</h1>
+        <h1 class="text-4xl font-bold text-gray-900">My Bookings</h1>
         <p class="text-gray-500 mt-2">Track all your booked salon services</p>
     </div>
 

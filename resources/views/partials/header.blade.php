@@ -36,14 +36,11 @@
                     Contact
                 </a>
 
-                <a href="{{ route('bookings.index') }}"
-                    class="{{ request()->routeIs('bookings.*') ? 'text-[#D4AF37] border-b border-[#D4AF37] pb-1 font-bold text-lg tracking-tight' : 'text-[#D0C5AF] font-medium tracking-widest uppercase text-[10px]' }} hover:text-[#D4AF37] transition-all duration-300 ease-in-out cursor-pointer active:scale-95">
-                    My Bookings
-                </a>
+               
 @auth
 <a href="{{ route('inventory.index') }}"
    class="{{ request()->routeIs('inventory.*') ? 'text-[#D4AF37] border-b border-[#D4AF37] pb-1 font-bold text-lg tracking-tight' : 'text-[#D0C5AF] font-medium tracking-widest uppercase text-[10px]' }} hover:text-[#D4AF37] transition-all duration-300 ease-in-out cursor-pointer active:scale-95">
-    Inventory
+    My Bookings
 </a>
 @endauth
 

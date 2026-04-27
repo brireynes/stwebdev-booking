@@ -12,8 +12,8 @@
             <h1 class="text-5xl font-bold tracking-tight text-black">
                 Choose the perfect salon service
             </h1>
-            <p class="mt-4 max-w-2xl mx-auto text-on-surface-variant text-shadow-gray-700">
-                Browse our service collection, view details, and book instantly.
+            <p class="mt-4 max-w-2xl mx-auto text-gray-500">
+                Browse our services, packages, and promos. Book instantly.
             </p>
         </div>
 
@@ -24,69 +24,79 @@
             </div>
         @endif
 
-        <!-- Services Grid -->
-        <div class="grid gap-8 lg:grid-cols-3">
+        {{-- ===================== SERVICES ===================== --}}
+        <section id="services" class="mb-20">
+            <h2 class="text-3xl font-bold mb-8 text-gray-900">Services</h2>
 
-            @forelse($services as $service)
-                <article class="flex flex-col justify-between h-full rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition hover:shadow-md">
+            <div class="grid gap-8 lg:grid-cols-3">
+                @forelse($services as $service)
+                    @include('partials.service-card', ['item' => $service])
+                @empty
+                    <p class="text-gray-500">No services available.</p>
+                @endforelse
+            </div>
+        </section>
 
-                    <!-- Image -->
-                    <div class="mb-5">
-                        <img
-                            src="https://via.placeholder.com/600x400?text=Service+Image"
-                            alt="Service Image"
-                            class="w-full h-48 object-cover rounded-xl border border-gray-200"
-                        >
-                    </div>
+        {{-- ===================== PACKAGES ===================== --}}
+        <section id="packages" class="mb-20">
+            <h2 class="text-3xl font-bold mb-8 text-gray-900">Packages</h2>
 
-                    <!-- Content -->
-                    <div class="flex-1">
+            <div class="grid gap-8 lg:grid-cols-3">
+                @forelse($packages as $package)
+                    @include('partials.service-card', ['item' => $package])
+                @empty
+                    <p class="text-gray-500">No packages available.</p>
+                @endforelse
+            </div>
+        </section>
 
-                        <!-- Title -->
-                        <h2 class="text-xl font-semibold text-gray-900 mb-2">
-                            {{ $service->name }}
-                        </h2>
+        {{-- ===================== PROMOS ===================== --}}
+        <section id="promos">
+            <h2 class="text-3xl font-bold mb-8 text-gray-900">Promos</h2>
 
-                        <!-- Description -->
-                        <p class="text-gray-500 text-sm mb-5">
-                            {{ \Illuminate\Support\Str::limit($service->description, 120) }}
-                        </p>
-
-                        <!-- Price + Duration -->
-                        <div class="flex items-center justify-between mb-6">
-                            <div>
-                                <span class="text-xs uppercase tracking-widest text-gray-400">
-                                    Price
-                                </span>
-                                <p class="text-lg font-bold text-gray-900">
-                                    ₱{{ number_format($service->price, 2) }}
-                                </p>
-                            </div>
-
-                            <span class="text-xs bg-gray-100 px-3 py-1 rounded-full text-gray-600">
-                                {{ $service->duration }} mins
-                            </span>
-                        </div>
-
-                    </div>
-
-                    <!-- BUTTON (always aligned bottom) -->
-                    <div class="mt-auto">
-                        <a href="{{ route('booking.create', $service->id) }}"
-                           class="block w-full rounded-xl bg-yellow-500 px-5 py-3 text-center font-semibold text-white hover:bg-yellow-600 transition">
-                            Book Now
-                        </a>
-                    </div>
-
-                </article>
-            @empty
-                <div class="lg:col-span-3 text-center text-gray-500 py-10">
-                    No services available yet.
-                </div>
-            @endforelse
-
-        </div>
+            <div class="grid gap-8 lg:grid-cols-3">
+                @forelse($promos as $promo)
+                    @include('partials.service-card', ['item' => $promo])
+                @empty
+                    <p class="text-gray-500">No promos available.</p>
+                @endforelse
+            </div>
+        </section>
 
     </div>
 </div>
+
+@guest
+    <!-- Global Login Modal -->
+    <div id="loginModal"
+         class="fixed inset-0 z-50 hidden items-center justify-center bg-black/40 backdrop-blur-sm px-4">
+
+        <div class="bg-white rounded-2xl shadow-xl max-w-md w-full p-8 text-center">
+            <h2 class="text-2xl font-bold text-gray-900 mb-3">
+                Login Required
+            </h2>
+
+            <p class="text-gray-600 mb-6">
+                You need to log in before booking a service.
+            </p>
+
+            <a href="{{ route('login') }}"
+               class="inline-block rounded-xl bg-yellow-500 px-8 py-3 font-semibold text-white hover:bg-yellow-600 transition">
+                Log In
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function openLoginModal() {
+            const modal = document.getElementById('loginModal');
+
+            if (!modal) return;
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+    </script>
+@endguest
+
 @endsection

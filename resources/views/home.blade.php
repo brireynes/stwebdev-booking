@@ -22,170 +22,86 @@
     </div>
 </div>
 
-
-<!-- SERVICES SECTION -->
-<div id="services" class="w-full h-[500px] flex items-center bg-white border-b">
-    <div class="max-w-7xl mx-auto px-6 w-full grid md:grid-cols-2 gap-8 items-center">
-
-        <div>
-            <h2 class="text-3xl font-bold text-yellow-600 mb-4">Services</h2>
-            <p class="text-gray-600 mb-6">
-                Experience professional haircuts, styling, and treatments tailored just for you.
-            </p>
-            <a href="{{ route('services.index') }}"
-               class="bg-yellow-600 text-white px-6 py-3 rounded-lg hover:bg-yellow-500 transition">
-                Explore Services
-            </a>
-        </div>
-
-        <div class="h-[300px] md:h-full bg-gray-200 rounded-xl flex items-center justify-center">
-            <span class="text-gray-500">Service Image</span>
-        </div>
-
-    </div>
-</div>
-
-
-<!-- PACKAGES SECTION -->
-<div id="packages" class="max-w-7xl mx-auto px-6 py-16">
-    <h2 class="text-3xl font-bold text-yellow-600 mb-10 text-center">Packages</h2>
-
-    <div class="grid md:grid-cols-3 gap-6">
-
-        <!-- Basic -->
-        <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden flex flex-col">
-
-            <div class="h-56 bg-gray-200 flex items-center justify-center">
-                <span class="text-gray-500 text-sm">Image</span>
-            </div>
-
-            <div class="p-6 flex flex-col flex-1">
-                <h2 class="text-xl font-semibold mb-2 text-black">Basic Package</h2>
-                <p class="text-gray-600 mb-4">Perfect for small events.</p>
-                <p class="text-2xl font-bold text-yellow-600 mb-6">₱2,000</p>
-
-                <button class="w-full bg-yellow-600 text-white py-2 rounded-lg hover:bg-yellow-700 mt-auto">
-                    Book Now
-                </button>
-            </div>
-        </div>
-
-        <!-- Deluxe -->
-        <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden flex flex-col">
-
-            <div class="h-56 bg-gray-200 flex items-center justify-center">
-                <span class="text-gray-500 text-sm">Image</span>
-            </div>
-
-            <div class="p-6 flex flex-col flex-1">
-                <span class="text-xs bg-yellow-600 text-white px-2 py-1 rounded-full w-fit mb-2">Popular</span>
-
-                <h2 class="text-xl font-semibold mb-2 text-black">Deluxe Package</h2>
-                <p class="text-gray-600 mb-4">Best for medium-sized events.</p>
-                <p class="text-2xl font-bold text-yellow-600 mb-6">₱5,000</p>
-
-                <button class="w-full bg-yellow-600 text-white py-2 rounded-lg hover:bg-yellow-700 mt-auto">
-                    Book Now
-                </button>
-            </div>
-        </div>
-
-        <!-- Prestige -->
-        <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden flex flex-col">
-
-            <div class="h-56 bg-gray-200 flex items-center justify-center">
-                <span class="text-gray-500 text-sm">Image</span>
-            </div>
-
-            <div class="p-6 flex flex-col flex-1">
-                <h2 class="text-xl font-semibold mb-2 text-black">Prestige Package</h2>
-                <p class="text-gray-600 mb-4">Perfect for large events.</p>
-                <p class="text-2xl font-bold text-yellow-600 mb-6">₱10,000</p>
-
-                <button class="w-full bg-yellow-600 text-white py-2 rounded-lg hover:bg-yellow-700 mt-auto">
-                    Book Now
-                </button>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-
-<!-- PROMOS SECTION -->
-<div id="promos" class="w-full py-16 bg-gray-100">
+<!-- CATEGORIES SECTION -->
+<div class="w-full bg-white py-20">
     <div class="max-w-7xl mx-auto px-6">
 
-        <h2 class="text-3xl font-bold text-yellow-600 mb-10 text-center">
-            Promos
-        </h2>
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-yellow-600 mb-3">
+                Explore Bong's Salon
+            </h2>
+            <p class="text-gray-600">
+                Browse our services, packages, and promos in one place.
+            </p>
+        </div>
 
-        <div class="grid md:grid-cols-3 gap-6">
+        <div class="grid md:grid-cols-3 gap-8">
 
-            <!-- Promo 1 -->
-            <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden flex flex-col">
-
-                <div class="h-56 bg-gray-200 flex items-center justify-center">
-                    <span class="text-gray-500 text-sm">Image</span>
-                </div>
-
-                <div class="p-6 flex flex-col flex-1">
-                    <span class="text-xs bg-yellow-600 text-white px-2 py-1 rounded-full w-fit mb-2">Limited</span>
-
-                    <h2 class="text-xl font-semibold mb-2 text-black">Summer Promo</h2>
-                    <p class="text-gray-600 mb-4">Enjoy 20% off on all packages.</p>
-                    <p class="text-sm text-gray-500 mb-6">Valid until May 30</p>
-
-                    <button class="w-full bg-yellow-600 text-white py-2 rounded-lg hover:bg-yellow-700 mt-auto">
-                        Avail Promo
-                    </button>
-                </div>
-
-            </div>
-
-            <!-- Promo 2 -->
-            <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden flex flex-col">
+            <!-- Services -->
+            <a href="{{ route('services.index') }}#services"
+               class="group bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden hover:shadow-lg transition">
 
                 <div class="h-56 bg-gray-200 flex items-center justify-center">
-                    <span class="text-gray-500 text-sm">Image</span>
+                    <span class="text-gray-500 text-sm">Services Image</span>
                 </div>
 
-                <div class="p-6 flex flex-col flex-1">
-                    <span class="text-xs bg-yellow-600 text-white px-2 py-1 rounded-full w-fit mb-2">Hot Deal</span>
-
-                    <h2 class="text-xl font-semibold mb-2 text-black">Weekend Special</h2>
-                    <p class="text-gray-600 mb-4">Book on weekends and get free decorations.</p>
-                    <p class="text-sm text-gray-500 mb-6">Every Saturday & Sunday</p>
-
-                    <button class="w-full bg-yellow-600 text-white py-2 rounded-lg hover:bg-yellow-700 mt-auto">
-                        Avail Promo
-                    </button>
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-black mb-2 group-hover:text-yellow-600 transition">
+                        Services
+                    </h3>
+                    <p class="text-gray-600 mb-5">
+                        View all salon services including hair, nails, and beauty treatments.
+                    </p>
+                    <span class="inline-block bg-yellow-600 text-white px-5 py-2 rounded-lg group-hover:bg-yellow-700 transition">
+                        Explore Services
+                    </span>
                 </div>
+            </a>
 
-            </div>
-
-            <!-- Promo 3 -->
-            <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden flex flex-col">
+            <!-- Packages -->
+            <a href="{{ route('services.index') }}#packages"
+               class="group bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden hover:shadow-lg transition">
 
                 <div class="h-56 bg-gray-200 flex items-center justify-center">
-                    <span class="text-gray-500 text-sm">Image</span>
+                    <span class="text-gray-500 text-sm">Packages Image</span>
                 </div>
 
-                <div class="p-6 flex flex-col flex-1">
-                    <span class="text-xs bg-yellow-600 text-white px-2 py-1 rounded-full w-fit mb-2">Best Value</span>
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-black mb-2 group-hover:text-yellow-600 transition">
+                        Packages
+                    </h3>
+                    <p class="text-gray-600 mb-5">
+                        Check bundled salon offers and complete beauty packages.
+                    </p>
+                    <span class="inline-block bg-yellow-600 text-white px-5 py-2 rounded-lg group-hover:bg-yellow-700 transition">
+                        Explore Packages
+                    </span>
+                </div>
+            </a>
 
-                    <h2 class="text-xl font-semibold mb-2 text-black">Group Discount</h2>
-                    <p class="text-gray-600 mb-4">Get ₱1,000 off for group bookings.</p>
-                    <p class="text-sm text-gray-500 mb-6">Minimum of 5 bookings</p>
+            <!-- Promos -->
+            <a href="{{ route('services.index') }}#promos"
+               class="group bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden hover:shadow-lg transition">
 
-                    <button class="w-full bg-yellow-600 text-white py-2 rounded-lg hover:bg-yellow-700 mt-auto">
-                        Avail Promo
-                    </button>
+                <div class="h-56 bg-gray-200 flex items-center justify-center">
+                    <span class="text-gray-500 text-sm">Promos Image</span>
                 </div>
 
-            </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-black mb-2 group-hover:text-yellow-600 transition">
+                        Promos
+                    </h3>
+                    <p class="text-gray-600 mb-5">
+                        See current discounts, limited offers, and special deals.
+                    </p>
+                    <span class="inline-block bg-yellow-600 text-white px-5 py-2 rounded-lg group-hover:bg-yellow-700 transition">
+                        Explore Promos
+                    </span>
+                </div>
+            </a>
 
         </div>
+
     </div>
 </div>
 

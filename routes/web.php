@@ -5,6 +5,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\ContactController;
 
 Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
 Route::get('/booking/{service}', [BookingController::class, 'create'])->name('booking.create');
@@ -26,9 +27,8 @@ Route::get('/promos', function () {
     return view('promos');
 })->name('promos.index');
 
-Route::get('/contact', function () {
-    return view('contact');
-})->name('contact');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 Route::get('/about', function () {
     return view('about');

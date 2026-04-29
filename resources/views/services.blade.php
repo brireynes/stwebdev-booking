@@ -1,6 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
+@push('styles')
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        section {
+            scroll-margin-top: 90px;
+        }
+    </style>
+@endpush
 <div class="bg-gray-50 text-on-surface">
     <div class="max-w-7xl mx-auto px-6 py-16">
 

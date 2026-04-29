@@ -23,15 +23,20 @@
 </div>
 
 <!-- CATEGORIES SECTION -->
-<div class="w-full bg-white py-20">
+<section class="w-full bg-white py-20">
     <div class="max-w-7xl mx-auto px-6">
 
         <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold text-yellow-600 mb-3">
-                Explore Bong's Salon
+            <span class="inline-block text-sm uppercase tracking-[0.35em] text-yellow-600 mb-3">
+                Curated Salon Collection
+            </span>
+
+            <h2 class="text-3xl md:text-4xl font-bold text-black mb-4">
+                Choose Your Signature Experience
             </h2>
-            <p class="text-gray-600">
-                Browse our services, packages, and promos in one place.
+
+            <p class="text-gray-600 max-w-2xl mx-auto">
+                Explore our premium services, exclusive packages, and limited promos crafted for a classy salon experience.
             </p>
         </div>
 
@@ -39,63 +44,72 @@
 
             <!-- Services -->
             <a href="{{ route('services.index') }}#services"
-               class="group bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden hover:shadow-lg transition">
+               class="group block overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm hover:shadow-xl transition">
 
-                <div class="h-56 bg-gray-200 flex items-center justify-center">
-                    <span class="text-gray-500 text-sm">Services Image</span>
+                <div class="h-72 bg-cover bg-center transition duration-500 group-hover:scale-105"
+                     style="background-image: url('/images/services.jpg');">
+                    <div class="h-full w-full bg-black/20"></div>
                 </div>
 
-                <div class="p-6">
-                    <h3 class="text-xl font-semibold text-black mb-2 group-hover:text-yellow-600 transition">
+                <div class="p-6 text-center">
+                    <h3 class="text-xl font-bold text-black mb-2 group-hover:text-yellow-600 transition">
                         Services
                     </h3>
-                    <p class="text-gray-600 mb-5">
-                        View all salon services including hair, nails, and beauty treatments.
+
+                    <p class="text-gray-600 text-sm mb-4">
+                        Premium hair, nail, and beauty treatments.
                     </p>
-                    <span class="inline-block bg-yellow-600 text-white px-5 py-2 rounded-lg group-hover:bg-yellow-700 transition">
-                        Explore Services
+
+                    <span class="text-yellow-600 font-semibold">
+                        View Services →
                     </span>
                 </div>
             </a>
 
             <!-- Packages -->
             <a href="{{ route('services.index') }}#packages"
-               class="group bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden hover:shadow-lg transition">
+               class="group block overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm hover:shadow-xl transition">
 
-                <div class="h-56 bg-gray-200 flex items-center justify-center">
-                    <span class="text-gray-500 text-sm">Packages Image</span>
+                <div class="h-72 bg-cover bg-center transition duration-500 group-hover:scale-105"
+                     style="background-image: url('/images/packages.jpg');">
+                    <div class="h-full w-full bg-black/20"></div>
                 </div>
 
-                <div class="p-6">
-                    <h3 class="text-xl font-semibold text-black mb-2 group-hover:text-yellow-600 transition">
+                <div class="p-6 text-center">
+                    <h3 class="text-xl font-bold text-black mb-2 group-hover:text-yellow-600 transition">
                         Packages
                     </h3>
-                    <p class="text-gray-600 mb-5">
-                        Check bundled salon offers and complete beauty packages.
+
+                    <p class="text-gray-600 text-sm mb-4">
+                        Complete salon bundles for a refined transformation.
                     </p>
-                    <span class="inline-block bg-yellow-600 text-white px-5 py-2 rounded-lg group-hover:bg-yellow-700 transition">
-                        Explore Packages
+
+                    <span class="text-yellow-600 font-semibold">
+                        View Packages →
                     </span>
                 </div>
             </a>
 
             <!-- Promos -->
             <a href="{{ route('services.index') }}#promos"
-               class="group bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden hover:shadow-lg transition">
+               class="group block overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm hover:shadow-xl transition">
 
-                <div class="h-56 bg-gray-200 flex items-center justify-center">
-                    <span class="text-gray-500 text-sm">Promos Image</span>
+                <div class="h-72 bg-cover bg-center transition duration-500 group-hover:scale-105"
+                     style="background-image: url('/images/promos.jpg');">
+                    <div class="h-full w-full bg-black/20"></div>
                 </div>
 
-                <div class="p-6">
-                    <h3 class="text-xl font-semibold text-black mb-2 group-hover:text-yellow-600 transition">
+                <div class="p-6 text-center">
+                    <h3 class="text-xl font-bold text-black mb-2 group-hover:text-yellow-600 transition">
                         Promos
                     </h3>
-                    <p class="text-gray-600 mb-5">
-                        See current discounts, limited offers, and special deals.
+
+                    <p class="text-gray-600 text-sm mb-4">
+                        Special offers and limited salon deals.
                     </p>
-                    <span class="inline-block bg-yellow-600 text-white px-5 py-2 rounded-lg group-hover:bg-yellow-700 transition">
-                        Explore Promos
+
+                    <span class="text-yellow-600 font-semibold">
+                        View Promos →
                     </span>
                 </div>
             </a>
@@ -103,6 +117,41 @@
         </div>
 
     </div>
-</div>
+</section>
+<!-- CTA BANNER -->
+<section class="w-full bg-black">
+    <div class="relative max-w-7xl mx-auto px-6 py-20 flex flex-col md:flex-row items-center gap-10">
 
+        <!-- Image -->
+        <div class="w-full md:w-1/2">
+            <img src="{{ asset('images/cta-banner.jpg') }}"
+                 alt="Salon Experience"
+                 class="w-full rounded-3xl shadow-lg object-cover">
+        </div>
+
+        <!-- Text -->
+        <div class="w-full md:w-1/2 text-center md:text-left">
+
+            <span class="inline-block text-sm uppercase tracking-[0.35em] text-yellow-500 mb-4">
+                Luxury Experience
+            </span>
+
+            <h2 class="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
+                Begin Your<br>
+                Signature Look
+            </h2>
+
+            <p class="text-gray-400 mb-8">
+                Step into elegance and let our expert stylists bring out your best look with premium salon care.
+            </p>
+
+            <a href="{{ route('services.index') }}"
+               class="inline-block bg-yellow-500 text-black px-8 py-3 rounded-full font-semibold hover:bg-yellow-400 transition">
+                Explore Services
+            </a>
+
+        </div>
+
+    </div>
+</section>
 @endsection

@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ContactController;
+use App\Models\Service;
 
 Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
 Route::get('/booking/{service}', [BookingController::class, 'create'])->name('booking.create');
@@ -13,11 +14,14 @@ Route::get('/booking/{service}', [BookingController::class, 'create'])->name('bo
 
 // Home
 Route::get('/', function () {
-    return view('home');
+    $featuredServices = Service::where('is_featured', true)
+        ->latest()
+        ->take(3)
+        ->get();
+
+    return view('home', compact('featuredServices'));
 })->name('home');
-
 // Public pages
-
 
 Route::get('/packages', function () {
     return view('packages');
@@ -86,7 +90,29 @@ Route::get('/admin/users', [AdminController::class, 'users'])
 Route::delete('/admin/users/{id}', [AdminController::class, 'deleteUser'])
     ->middleware(['auth', 'role:admin'])
     ->name('admin.users.delete');
+    Route::get('/admin/services', [AdminController::class, 'services'])
+    ->middleware(['auth', 'role:admin'])
+    ->name('admin.services');
 
+Route::get('/admin/services/create', [AdminController::class, 'createService'])
+    ->middleware(['auth', 'role:admin'])
+    ->name('admin.services.create');
+
+Route::post('/admin/services', [AdminController::class, 'storeService'])
+    ->middleware(['auth', 'role:admin'])
+    ->name('admin.services.store');
+
+Route::get('/admin/services/{service}/edit', [AdminController::class, 'editService'])
+    ->middleware(['auth', 'role:admin'])
+    ->name('admin.services.edit');
+
+Route::put('/admin/services/{service}', [AdminController::class, 'updateService'])
+    ->middleware(['auth', 'role:admin'])
+    ->name('admin.services.update');
+
+Route::delete('/admin/services/{service}', [AdminController::class, 'deleteService'])
+    ->middleware(['auth', 'role:admin'])
+    ->name('admin.services.delete');
 // Auth protected
 Route::middleware('auth')->group(function () {
     Route::get('/profile', function () {

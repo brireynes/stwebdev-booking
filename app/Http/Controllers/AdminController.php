@@ -65,4 +65,68 @@ public function updateStatus(Request $request, $id)
 
     return redirect()->back()->with('success', 'Booking status updated successfully.');
 }
+
+public function services()
+{
+    $services = Service::latest()->get();
+
+    return view('admin.services.index', compact('services'));
+}
+
+public function createService()
+{
+    return view('admin.services.create');
+}
+
+public function storeService(Request $request)
+{
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'price' => 'required|numeric|min:0',
+        'duration' => 'required|integer|min:1',
+        'type' => 'required|in:service,package,promo',
+    ]);
+
+    $validated['is_featured'] = $request->has('is_featured');
+
+    Service::create($validated);
+
+    return redirect()
+        ->route('admin.services')
+        ->with('success', 'Service created successfully.');
+}
+
+public function editService(Service $service)
+{
+    return view('admin.services.edit', compact('service'));
+}
+
+public function updateService(Request $request, Service $service)
+{
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'price' => 'required|numeric|min:0',
+        'duration' => 'required|integer|min:1',
+        'type' => 'required|in:service,package,promo',
+    ]);
+
+    $validated['is_featured'] = $request->has('is_featured');
+
+    $service->update($validated);
+
+    return redirect()
+        ->route('admin.services')
+        ->with('success', 'Service updated successfully.');
+}
+
+public function deleteService(Service $service)
+{
+    $service->delete();
+
+    return redirect()
+        ->route('admin.services')
+        ->with('success', 'Service deleted successfully.');
+}
 }

@@ -9,44 +9,57 @@
 <body class="min-h-screen bg-gray-100 text-black">
 
     <div class="flex min-h-screen">
+
+        <!-- SIDEBAR -->
         <aside class="w-64 bg-white border-r p-6">
             <h2 class="text-xl font-bold mb-6">Admin Panel</h2>
 
             <nav class="space-y-3">
-                <a href="{{ route('admin.dashboard') }}" class="block text-gray-700 hover:text-black">
+
+                <!-- Dashboard -->
+                <a href="{{ route('admin.dashboard') }}"
+                   class="block text-gray-700 hover:text-black">
                     Dashboard
                 </a>
-                <a href="{{ route('admin.bookings') }}" class="block text-gray-700 hover:text-black">
+
+                <!-- Bookings -->
+                <a href="{{ route('admin.bookings') }}"
+                   class="block text-gray-700 hover:text-black">
                     Bookings
                 </a>
-                <a href="#" class="block text-gray-700 hover:text-black">
+
+                <!-- Services (FIXED) -->
+                <a href="{{ route('admin.services') }}"
+                   class="block text-gray-700 hover:text-black">
                     Services
                 </a>
-                <a href="{{ route('admin.users') }}" class="block text-gray-700 hover:text-black">
+
+                <!-- Users -->
+                <a href="{{ route('admin.users') }}"
+                   class="block text-gray-700 hover:text-black">
                     Users
                 </a>
 
+                <!-- Logout -->
                 <div class="mt-10 border-t pt-4">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
 
-    <form method="POST" action="{{ route('logout') }}">
-        @csrf
+                        <button type="submit"
+                            class="w-full text-left text-red-500 hover:text-red-700 font-medium transition">
+                            Logout
+                        </button>
+                    </form>
+                </div>
 
-        <button type="submit"
-            class="w-full text-left text-red-500 hover:text-red-700 font-medium transition">
-            Logout
-        </button>
-
-    </form>
-
-</div>
             </nav>
         </aside>
 
-        
-
+        <!-- MAIN CONTENT -->
         <main class="flex-1 p-8">
             @yield('content')
         </main>
+
     </div>
 
 </body>

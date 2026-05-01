@@ -25,7 +25,7 @@ class AdminController extends Controller
 
     public function users()
 {
-    $users = User::latest()->get();
+    $users = User::where('role', '!=', 'super_admin')->latest()->get();
 
     return view('admin.users', compact('users'));
 }
@@ -33,10 +33,21 @@ class AdminController extends Controller
 public function deleteUser($id)
 {
     $user = User::findOrFail($id);
+    $authUser = auth()->user();
 
     // safety: prevent deleting self
-    if (auth()->id() == $user->id) {
+    if ($authUser->id == $user->id) {
         return redirect()->back()->with('error', 'You cannot delete your own account.');
+    }
+
+    // Only super_admin can delete admins, regular admins cannot delete admins
+    if ($user->role === 'admin' && $authUser->role !== 'super_admin') {
+        return redirect()->back()->with('error', 'You do not have permission to delete admins.');
+    }
+
+    // Prevent deleting super_admin users
+    if ($user->role === 'super_admin') {
+        return redirect()->back()->with('error', 'You cannot delete super admin users.');
     }
 
     $user->delete();

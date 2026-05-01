@@ -60,7 +60,11 @@
                         </td>
 
                         <td class="p-4">
-                            @if($user->role == 'admin')
+                            @if($user->role == 'super_admin')
+                                <span class="px-3 py-1 text-xs bg-red-200 text-red-800 rounded-full">
+                                    Super Admin
+                                </span>
+                            @elseif($user->role == 'admin')
                                 <span class="px-3 py-1 text-xs bg-yellow-200 text-yellow-800 rounded-full">
                                     Admin
                                 </span>

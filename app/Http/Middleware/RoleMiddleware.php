@@ -14,7 +14,9 @@ class RoleMiddleware
             return redirect('/login');
         }
 
-        if (Auth::user()->role !== $role) {
+        $userRole = Auth::user()->role;
+
+        if ($userRole !== $role && $userRole !== 'super_admin') {
             return redirect('/');
         }
 

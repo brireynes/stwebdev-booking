@@ -6,7 +6,7 @@
 <div class="p-6 max-w-3xl">
     <h1 class="text-2xl font-bold mb-6">Add Service / Package / Promo</h1>
 
-    <form action="{{ route('admin.services.store') }}" method="POST" class="space-y-4">
+    <<form action="{{ route('admin.services.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
         @csrf
 
         <div>
@@ -45,7 +45,12 @@
             </select>
             @error('type') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
         </div>
-
+        <div>
+            <label class="block font-semibold mb-1">Image</label>
+            <input type="file" name="image" accept="image/*"
+                class="w-full border rounded p-2">
+            @error('image') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
+        </div>
         <div>
             <label class="flex items-center gap-2">
                 <input type="checkbox" name="is_featured" value="1" {{ old('is_featured') ? 'checked' : '' }}>

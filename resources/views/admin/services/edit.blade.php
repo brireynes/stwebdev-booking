@@ -6,7 +6,7 @@
 <div class="p-6 max-w-3xl">
     <h1 class="text-2xl font-bold mb-6">Edit Service / Package / Promo</h1>
 
-    <form action="{{ route('admin.services.update', $service) }}" method="POST" class="space-y-4">
+    <form action="{{ route('admin.services.update', $service) }}" method="POST" enctype="multipart/form-data" class="space-y-4">
         @csrf
         @method('PUT')
 
@@ -46,7 +46,24 @@
             </select>
             @error('type') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
         </div>
+        <div>
+            <label class="block font-semibold mb-1">Image</label>
 
+            @if($service->image)
+                <img src="{{ asset('storage/' . $service->image) }}"
+                    alt="{{ $service->name }}"
+                    class="w-40 h-28 object-cover rounded mb-3">
+            @endif
+
+            <input type="file" name="image" accept="image/*"
+                class="w-full border rounded p-2">
+
+            <p class="text-sm text-gray-500 mt-1">
+                Leave empty to keep current image.
+            </p>
+
+            @error('image') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
+        </div>
         <div>
             <label class="flex items-center gap-2">
                 <input type="checkbox" name="is_featured" value="1"

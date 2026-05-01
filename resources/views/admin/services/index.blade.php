@@ -23,6 +23,7 @@
         <table class="w-full border-collapse">
             <thead>
                 <tr class="bg-gray-100 text-left">
+                    <th class="p-3 border">Image</th>
                     <th class="p-3 border">Name</th>
                     <th class="p-3 border">Type</th>
                     <th class="p-3 border">Price</th>
@@ -35,35 +36,60 @@
             <tbody>
                 @forelse($services as $service)
                     <tr>
-                        <td class="p-3 border">{{ $service->name }}</td>
-                        <td class="p-3 border">{{ ucfirst($service->type) }}</td>
-                        <td class="p-3 border">₱{{ number_format($service->price, 2) }}</td>
-                        <td class="p-3 border">{{ $service->duration }} mins</td>
+                        <td class="p-3 border">
+                            @if($service->image)
+                                <img src="{{ asset('storage/' . $service->image) }}"
+                                     alt="{{ $service->name }}"
+                                     class="w-20 h-16 object-cover rounded">
+                            @else
+                                <span class="text-gray-400">No image</span>
+                            @endif
+                        </td>
+
+                        <td class="p-3 border">
+                            {{ $service->name }}
+                        </td>
+
+                        <td class="p-3 border">
+                            {{ ucfirst($service->type) }}
+                        </td>
+
+                        <td class="p-3 border">
+                            ₱{{ number_format($service->price, 2) }}
+                        </td>
+
+                        <td class="p-3 border">
+                            {{ $service->duration }} mins
+                        </td>
+
                         <td class="p-3 border">
                             {{ $service->is_featured ? 'Yes' : 'No' }}
                         </td>
-                        <td class="p-3 border flex gap-2">
-                            <a href="{{ route('admin.services.edit', $service) }}"
-                               class="bg-blue-500 text-white px-3 py-1 rounded">
-                                Edit
-                            </a>
 
-                            <form action="{{ route('admin.services.delete', $service) }}"
-                                  method="POST"
-                                  onsubmit="return confirm('Delete this item?');">
-                                @csrf
-                                @method('DELETE')
+                        <td class="p-3 border">
+                            <div class="flex gap-2">
+                                <a href="{{ route('admin.services.edit', $service) }}"
+                                   class="bg-blue-500 text-white px-3 py-1 rounded">
+                                    Edit
+                                </a>
 
-                                <button type="submit"
-                                        class="bg-red-500 text-white px-3 py-1 rounded">
-                                    Delete
-                                </button>
-                            </form>
+                                <form action="{{ route('admin.services.delete', $service) }}"
+                                      method="POST"
+                                      onsubmit="return confirm('Delete this item?');">
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <button type="submit"
+                                            class="bg-red-500 text-white px-3 py-1 rounded">
+                                        Delete
+                                    </button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="p-3 border text-center">
+                        <td colspan="7" class="p-3 border text-center">
                             No services, packages, or promos found.
                         </td>
                     </tr>

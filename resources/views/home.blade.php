@@ -217,76 +217,48 @@
             </h2>
 
             <p class="text-gray-600 max-w-2xl mx-auto">
-                Discover client-favorite services designed for smooth, polished, and elegant results.
+                Discover client-favorite services selected by Bong's Salon.
             </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        @if($featuredServices->count())
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                @foreach($featuredServices as $service)
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200 hover:shadow-xl transition">
 
-            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200 hover:shadow-xl transition">
-                <img src="{{ asset('images/services.jpg') }}"
-                     alt="Hair Rebond"
-                     class="w-full h-64 object-cover">
+                        @if($service->image)
+                            <img src="{{ asset('storage/' . $service->image) }}"
+                                 alt="{{ $service->name }}"
+                                 class="w-full h-64 object-cover">
+                        @else
+                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center text-gray-400">
+                                No image
+                            </div>
+                        @endif
 
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-black mb-2">
-                        Hair Rebond
-                    </h3>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-black mb-2">
+                                {{ $service->name }}
+                            </h3>
 
-                    <p class="text-gray-600 text-sm mb-5">
-                        Smooth and straighten your hair for a sleek, polished look.
-                    </p>
+                            <p class="text-gray-600 text-sm mb-5">
+                                {{ \Illuminate\Support\Str::limit($service->description, 90) }}
+                            </p>
 
-                    <a href="{{ route('services.index') }}#services"
-                       class="text-yellow-600 font-semibold hover:text-yellow-700 transition">
-                        View Service →
-                    </a>
-                </div>
+                            <a href="{{ route('services.index') }}"
+                               class="text-yellow-600 font-semibold hover:text-yellow-700 transition">
+                                View Service →
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
             </div>
+        @else
+            <p class="text-center text-gray-500">
+                No featured services selected yet.
+            </p>
+        @endif
 
-            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200 hover:shadow-xl transition">
-                <img src="{{ asset('images/packages.jpg') }}"
-                     alt="Hair Color"
-                     class="w-full h-64 object-cover">
-
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-black mb-2">
-                        Hair Color
-                    </h3>
-
-                    <p class="text-gray-600 text-sm mb-5">
-                        Refresh your style with elegant color treatments.
-                    </p>
-
-                    <a href="{{ route('services.index') }}#services"
-                       class="text-yellow-600 font-semibold hover:text-yellow-700 transition">
-                        View Service →
-                    </a>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200 hover:shadow-xl transition">
-                <img src="{{ asset('images/promos.jpg') }}"
-                     alt="Salon Package"
-                     class="w-full h-64 object-cover">
-
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-black mb-2">
-                        Salon Packages
-                    </h3>
-
-                    <p class="text-gray-600 text-sm mb-5">
-                        Complete beauty bundles for a full salon transformation.
-                    </p>
-
-                    <a href="{{ route('services.index') }}#packages"
-                       class="text-yellow-600 font-semibold hover:text-yellow-700 transition">
-                        View Packages →
-                    </a>
-                </div>
-            </div>
-
-        </div>
     </div>
 </section>
 <!-- CTA BANNER -->

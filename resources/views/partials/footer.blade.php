@@ -4,10 +4,10 @@
 
             <div>
                 <h3 class="font-headline text-xl font-bold text-on-surface">
-                    Your Brand Name
+                    Bong's Salon
                 </h3>
                 <p class="mt-3 text-sm text-on-surface-variant">
-                    A short description about your salon or wellness brand goes here.
+                    transforms your look with the latest styles and vibrant color trends. Your hair's new happy place. Book now! ✂️
                 </p>
             </div>
 
@@ -33,22 +33,22 @@
             </div>
 
             <div>
-                <h4 class="mb-4 font-semibold text-on-surface">Location</h4>
+                <h4 class="mb-4 font-semibold text-on-surface">Bacolod City</h4>
                 <p class="text-sm leading-6 text-on-surface-variant">
-                    Your business address here
+                    Bong's Salon
                 </p>
             </div>
 
             <div>
                 <h4 class="mb-4 font-semibold text-on-surface">Get in Touch</h4>
-                <p class="text-sm text-on-surface-variant">Email: your@email.com</p>
-                <p class="mt-2 text-sm text-on-surface-variant">Phone: 0912-345-6789</p>
+                <p class="text-sm text-on-surface-variant">Email: chucia18@gmail.com</p>
+                <p class="mt-2 text-sm text-on-surface-variant">Phone: 0921 287 9031</p>
             </div>
 
         </div>
 
         <div class="mt-10 border-t border-outline-variant pt-4 text-sm text-on-surface-variant">
-            Copyright © {{ date('Y') }} Your Brand Name. All rights reserved.
+            Copyright © {{ date('Y') }} Bong's Salon. All rights reserved.
         </div>
     </div>
 </footer>

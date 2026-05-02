@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ContactController;
@@ -115,9 +116,9 @@ Route::delete('/admin/services/{service}', [AdminController::class, 'deleteServi
     ->name('admin.services.delete');
 // Auth protected
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', function () {
-        return view('profile.edit');
-    })->name('profile.edit');
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 });
 
 

@@ -36,7 +36,7 @@
             {{-- User Account --}}
             <div class="flex items-center gap-4">
                 @auth
-                    <a href="{{ route('profile.edit') }}" class="flex items-center gap-2 hover:text-yellow-500 transition">
+                    <a href="{{ route('profile.show') }}" class="flex items-center gap-2 hover:text-yellow-500 transition">
                         <span class="material-symbols-outlined">account_circle</span>
                         <span class="hidden md:inline">{{ Auth::user()->name }}</span>
                     </a>

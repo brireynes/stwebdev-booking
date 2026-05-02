@@ -1,17 +1,22 @@
 <article class="flex flex-col justify-between h-full rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition hover:shadow-md">
 
     <!-- Image -->
-    <div class="mb-5">
-        <img
-            src="{{ $item->image ? asset($item->image) : asset('images/default-service.jpg') }}"
-            alt="{{ $item->name }}"
-            class="w-full h-48 object-cover rounded-xl border border-gray-200"
-        >
-    </div>
+<div class="mb-5 w-full aspect-[4/3] bg-gray-50 rounded-xl border border-gray-200 flex items-center justify-center overflow-hidden">
+
+@if($item->image)
+    <img
+        src="{{ asset('storage/' . $item->image) }}"
+        alt="{{ $item->name }}"
+        class="h-full w-full object-cover"
+    >
+@else
+    <span class="text-gray-400">No image</span>
+@endif
+
+</div>
 
     <!-- Content -->
     <div class="flex-1">
-
         <h2 class="text-xl font-semibold text-gray-900 mb-2">
             {{ $item->name }}
         </h2>
@@ -34,7 +39,6 @@
                 {{ $item->duration }} mins
             </span>
         </div>
-
     </div>
 
     <!-- Button -->

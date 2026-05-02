@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Booking;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -97,9 +98,14 @@ public function storeService(Request $request)
         'price' => 'required|numeric|min:0',
         'duration' => 'required|integer|min:1',
         'type' => 'required|in:service,package,promo',
+        'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
     ]);
 
     $validated['is_featured'] = $request->has('is_featured');
+
+    if ($request->hasFile('image')) {
+        $validated['image'] = $request->file('image')->store('services', 'public');
+    }
 
     Service::create($validated);
 
@@ -121,9 +127,18 @@ public function updateService(Request $request, Service $service)
         'price' => 'required|numeric|min:0',
         'duration' => 'required|integer|min:1',
         'type' => 'required|in:service,package,promo',
+        'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5148',
     ]);
 
     $validated['is_featured'] = $request->has('is_featured');
+
+    if ($request->hasFile('image')) {
+        if ($service->image && Storage::disk('public')->exists($service->image)) {
+            Storage::disk('public')->delete($service->image);
+        }
+
+        $validated['image'] = $request->file('image')->store('services', 'public');
+    }
 
     $service->update($validated);
 
@@ -134,6 +149,10 @@ public function updateService(Request $request, Service $service)
 
 public function deleteService(Service $service)
 {
+    if ($service->image && Storage::disk('public')->exists($service->image)) {
+        Storage::disk('public')->delete($service->image);
+    }
+
     $service->delete();
 
     return redirect()

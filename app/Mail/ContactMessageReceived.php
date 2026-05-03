@@ -11,7 +11,7 @@ class ContactMessageReceived extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public ContactMessage $contactMessage;
+    public $contactMessage;
 
     public function __construct(ContactMessage $contactMessage)
     {

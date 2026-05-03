@@ -1,18 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\AdminController;
 use App\Models\Service;
 use App\Models\HomepageImage;
-
-Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
-Route::get('/booking/{service}', [BookingController::class, 'create'])->name('booking.create');
-
 
 // Home
 Route::get('/', function () {
@@ -25,7 +22,9 @@ Route::get('/', function () {
 
     return view('home', compact('featuredServices', 'homepageImages'));
 })->name('home');
+
 // Public pages
+Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
 
 Route::get('/packages', function () {
     return view('packages');
@@ -42,6 +41,7 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
+// Auth pages
 Route::get('/login', function () {
     return view('login', [
         'formAction' => url('/login'),
@@ -50,27 +50,44 @@ Route::get('/login', function () {
                 'name' => 'email',
                 'label' => 'Email',
                 'type' => 'email',
-                'placeholder' => 'Enter email'
+                'placeholder' => 'Enter email',
             ],
             [
                 'name' => 'password',
                 'label' => 'Password',
                 'type' => 'password',
-                'placeholder' => 'Enter password'
+                'placeholder' => 'Enter password',
             ],
-        ]
+        ],
     ]);
 })->name('login');
 
+Route::get('/register', [AuthController::class, 'showRegister']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::post('/logout', function () {
+    Auth::logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+
+    return redirect('/login');
+})->name('logout');
+
 // Booking
 Route::get('/booking', [BookingController::class, 'index'])->name('bookings.index');
+Route::get('/booking/{service}', [BookingController::class, 'create'])->name('booking.create');
+
 Route::post('/booking', [BookingController::class, 'store'])
     ->name('booking.store')
     ->middleware('auth');
 
-// Admin
-use App\Http\Controllers\AdminController;
+// Admin dashboard
+Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])
+    ->middleware(['auth', 'role:admin'])
+    ->name('admin.dashboard');
 
+// Admin homepage images
 Route::get('/admin/homepage-images', [AdminController::class, 'homepageImages'])
     ->middleware(['auth', 'role:admin'])
     ->name('admin.homepage-images');
@@ -79,14 +96,16 @@ Route::put('/admin/homepage-images/{homepageImage}', [AdminController::class, 'u
     ->middleware(['auth', 'role:admin'])
     ->name('admin.homepage-images.update');
 
-Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])
-    ->middleware(['auth', 'role:admin'])
-    ->name('admin.dashboard');
-
+// Admin users
 Route::get('/admin/users', [AdminController::class, 'users'])
     ->middleware(['auth', 'role:admin'])
     ->name('admin.users');
 
+Route::delete('/admin/users/{id}', [AdminController::class, 'deleteUser'])
+    ->middleware(['auth', 'role:admin'])
+    ->name('admin.users.delete');
+
+// Admin bookings
 Route::get('/admin/bookings', [AdminController::class, 'bookings'])
     ->middleware(['auth', 'role:admin'])
     ->name('admin.bookings');
@@ -95,14 +114,8 @@ Route::post('/admin/bookings/{id}/status', [AdminController::class, 'updateStatu
     ->middleware(['auth', 'role:admin'])
     ->name('admin.bookings.status');
 
-Route::get('/admin/users', [AdminController::class, 'users'])
-    ->middleware(['auth', 'role:admin'])
-    ->name('admin.users');
-
-Route::delete('/admin/users/{id}', [AdminController::class, 'deleteUser'])
-    ->middleware(['auth', 'role:admin'])
-    ->name('admin.users.delete');
-    Route::get('/admin/services', [AdminController::class, 'services'])
+// Admin services
+Route::get('/admin/services', [AdminController::class, 'services'])
     ->middleware(['auth', 'role:admin'])
     ->name('admin.services');
 
@@ -125,26 +138,15 @@ Route::put('/admin/services/{service}', [AdminController::class, 'updateService'
 Route::delete('/admin/services/{service}', [AdminController::class, 'deleteService'])
     ->middleware(['auth', 'role:admin'])
     ->name('admin.services.delete');
-// Auth protected
+
+// Profile
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 });
 
-
-Route::get('/register', [AuthController::class, 'showRegister']);
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', function () {
-    Auth::logout();
-    request()->session()->invalidate();
-    request()->session()->regenerateToken();
-
-    return redirect('/login');
-})->name('logout');
-
-
+// Inventory
 Route::get('/inventory', [BookingController::class, 'inventory'])
     ->middleware('auth')
     ->name('inventory.index');

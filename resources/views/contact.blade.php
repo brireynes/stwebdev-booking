@@ -53,8 +53,8 @@
                             <h3 class="text-xl font-bold text-black mb-1">Address</h3>
                             <p class="text-gray-600">
                                 Bong's Salon<br>
-                                Unit 2, Golden Avenue<br>
-                                Iloilo City, Philippines
+                                Terra Plaza Food Court, Gatuslao Street,<br>
+                                Bacolod City, Philippines, 6100
                             </p>
                         </div>
                     </div>

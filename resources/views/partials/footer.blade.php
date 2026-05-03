@@ -33,9 +33,11 @@
             </div>
 
             <div>
-                <h4 class="mb-4 font-semibold text-on-surface">Bacolod City</h4>
+                <h4 class="mb-4 font-semibold text-on-surface">Location</h4>
                 <p class="text-sm leading-6 text-on-surface-variant">
-                    Bong's Salon
+                    Bong's Salon<br>
+                    Terra Plaza Food Court, Gatuslao Street,<br>
+                    Bacolod City, Philippines, 6100
                 </p>
             </div>
 

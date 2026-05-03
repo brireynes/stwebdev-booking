@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ContactController;
 use App\Models\Service;
+use App\Models\HomepageImage;
 
 Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
 Route::get('/booking/{service}', [BookingController::class, 'create'])->name('booking.create');
@@ -20,7 +21,9 @@ Route::get('/', function () {
         ->take(3)
         ->get();
 
-    return view('home', compact('featuredServices'));
+    $homepageImages = HomepageImage::all()->keyBy('key');
+
+    return view('home', compact('featuredServices', 'homepageImages'));
 })->name('home');
 // Public pages
 
@@ -67,6 +70,14 @@ Route::post('/booking', [BookingController::class, 'store'])
 
 // Admin
 use App\Http\Controllers\AdminController;
+
+Route::get('/admin/homepage-images', [AdminController::class, 'homepageImages'])
+    ->middleware(['auth', 'role:admin'])
+    ->name('admin.homepage-images');
+
+Route::put('/admin/homepage-images/{homepageImage}', [AdminController::class, 'updateHomepageImage'])
+    ->middleware(['auth', 'role:admin'])
+    ->name('admin.homepage-images.update');
 
 Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])
     ->middleware(['auth', 'role:admin'])

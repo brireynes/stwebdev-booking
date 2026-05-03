@@ -7,6 +7,7 @@ use App\Models\Booking;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Models\HomepageImage;
 
 class AdminController extends Controller
 {
@@ -158,5 +159,30 @@ public function deleteService(Service $service)
     return redirect()
         ->route('admin.services')
         ->with('success', 'Service deleted successfully.');
+}
+public function homepageImages()
+{
+    $homepageImages = HomepageImage::all();
+
+    return view('admin.homepage-images.index', compact('homepageImages'));
+}
+
+public function updateHomepageImage(Request $request, HomepageImage $homepageImage)
+{
+    $request->validate([
+        'image' => 'required|image|mimes:jpg,jpeg,png,webp|max:5120',
+    ]);
+
+    if ($homepageImage->image && Storage::disk('public')->exists($homepageImage->image)) {
+        Storage::disk('public')->delete($homepageImage->image);
+    }
+
+    $homepageImage->update([
+        'image' => $request->file('image')->store('homepage', 'public'),
+    ]);
+
+    return redirect()
+        ->route('admin.homepage-images')
+        ->with('success', 'Homepage image updated successfully.');
 }
 }

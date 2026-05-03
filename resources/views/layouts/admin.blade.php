@@ -33,6 +33,10 @@
                    class="block text-gray-700 hover:text-black">
                     Services
                 </a>
+                
+                <a href="{{ route('admin.homepage-images') }}" class="block text-gray-700 hover:text-black">
+                    Homepage Images
+                </a>
 
                 <!-- Users -->
                 <a href="{{ route('admin.users') }}"

@@ -3,24 +3,27 @@
 @section('content')
 
 <!-- HERO BANNER -->
-<div id="home" class="w-full h-[500px] bg-cover bg-center flex items-center"
-     style="background-image: url('/images/salon-banner.jpg');">
+<section id="home"
+    class="relative w-full min-h-[650px] bg-cover bg-center flex items-center"
+    style="background-image: url('{{ isset($homepageImages['hero_banner']) && $homepageImages['hero_banner']->image ? asset('storage/' . $homepageImages['hero_banner']->image) : asset('images/salon-banner.jpg') }}');">
 
-    <div class="w-full h-full bg-black/50 flex items-center">
-        <div class="max-w-7xl mx-auto px-6 text-white">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">
-                Welcome to Bong's Salon
-            </h1>
-            <p class="text-lg md:text-xl mb-6 text-gray-200">
-                Experience premium beauty services with comfort and style
-            </p>
-            <a href="{{ route('bookings.index') }}"
-               class="bg-yellow-600 text-black px-6 py-3 rounded-lg font-semibold hover:bg-yellow-500 transition">
-                Book Now
-            </a>
-        </div>
+    <div class="absolute inset-0 bg-black/50"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6 text-white">
+        <h1 class="text-4xl md:text-6xl font-bold mb-4">
+            Welcome to Bong's Salon
+        </h1>
+
+        <p class="text-lg md:text-xl mb-8 text-gray-200 max-w-2xl">
+            Experience premium beauty services with comfort and style
+        </p>
+
+        <a href="{{ route('bookings.index') }}"
+           class="inline-block bg-yellow-500 text-black px-8 py-3 rounded-full font-semibold hover:bg-yellow-400 transition">
+            Book Now
+        </a>
     </div>
-</div>
+</section>
 
 <!-- CATEGORIES SECTION -->
 <section class="w-full bg-white py-20">
@@ -46,10 +49,15 @@
             <a href="{{ route('services.index') }}#services"
                class="group block overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm hover:shadow-xl transition">
 
-                <div class="h-72 bg-cover bg-center transition duration-500 group-hover:scale-105"
-                     style="background-image: url('/images/services.jpg');">
-                    <div class="h-full w-full bg-black/20"></div>
-                </div>
+                @if(isset($homepageImages['services_card']) && $homepageImages['services_card']->image)
+                    <img src="{{ asset('storage/' . $homepageImages['services_card']->image) }}"
+                         alt="Services"
+                         class="w-full h-72 object-cover transition duration-500 group-hover:scale-105">
+                @else
+                    <div class="w-full h-72 bg-gray-100 flex items-center justify-center text-gray-400">
+                        No image
+                    </div>
+                @endif
 
                 <div class="p-6 text-center">
                     <h3 class="text-xl font-bold text-black mb-2 group-hover:text-yellow-600 transition">
@@ -70,10 +78,15 @@
             <a href="{{ route('services.index') }}#packages"
                class="group block overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm hover:shadow-xl transition">
 
-                <div class="h-72 bg-cover bg-center transition duration-500 group-hover:scale-105"
-                     style="background-image: url('/images/packages.jpg');">
-                    <div class="h-full w-full bg-black/20"></div>
-                </div>
+                @if(isset($homepageImages['packages_card']) && $homepageImages['packages_card']->image)
+                    <img src="{{ asset('storage/' . $homepageImages['packages_card']->image) }}"
+                         alt="Packages"
+                         class="w-full h-72 object-cover transition duration-500 group-hover:scale-105">
+                @else
+                    <div class="w-full h-72 bg-gray-100 flex items-center justify-center text-gray-400">
+                        No image
+                    </div>
+                @endif
 
                 <div class="p-6 text-center">
                     <h3 class="text-xl font-bold text-black mb-2 group-hover:text-yellow-600 transition">
@@ -94,10 +107,15 @@
             <a href="{{ route('services.index') }}#promos"
                class="group block overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm hover:shadow-xl transition">
 
-                <div class="h-72 bg-cover bg-center transition duration-500 group-hover:scale-105"
-                     style="background-image: url('/images/promos.jpg');">
-                    <div class="h-full w-full bg-black/20"></div>
-                </div>
+                @if(isset($homepageImages['promos_card']) && $homepageImages['promos_card']->image)
+                    <img src="{{ asset('storage/' . $homepageImages['promos_card']->image) }}"
+                         alt="Promos"
+                         class="w-full h-72 object-cover transition duration-500 group-hover:scale-105">
+                @else
+                    <div class="w-full h-72 bg-gray-100 flex items-center justify-center text-gray-400">
+                        No image
+                    </div>
+                @endif
 
                 <div class="p-6 text-center">
                     <h3 class="text-xl font-bold text-black mb-2 group-hover:text-yellow-600 transition">
@@ -115,7 +133,6 @@
             </a>
 
         </div>
-
     </div>
 </section>
 
@@ -261,39 +278,32 @@
 
     </div>
 </section>
-<!-- CTA BANNER -->
-<section class="w-full bg-black">
-    <div class="relative max-w-7xl mx-auto px-6 py-20 flex flex-col md:flex-row items-center gap-10">
+<!-- CTA BANNER (FULL BACKGROUND) -->
+<section class="relative w-full min-h-[500px] flex items-center justify-center bg-cover bg-center"
+    style="background-image: url('{{ isset($homepageImages['cta_banner']) && $homepageImages['cta_banner']->image ? asset('storage/' . $homepageImages['cta_banner']->image) : asset('images/cta-default.jpg') }}');">
 
-        <!-- Image -->
-        <div class="w-full md:w-1/2">
-            <img src="{{ asset('images/cta-banner.jpg') }}"
-                 alt="Salon Experience"
-                 class="w-full rounded-3xl shadow-lg object-cover">
-        </div>
+    <!-- Dark overlay -->
+    <div class="absolute inset-0 bg-black/60"></div>
 
-        <!-- Text -->
-        <div class="w-full md:w-1/2 text-center md:text-left">
+    <!-- Content -->
+    <div class="relative z-10 text-center px-6 max-w-3xl">
 
-            <span class="inline-block text-sm uppercase tracking-[0.35em] text-yellow-500 mb-4">
-                Luxury Experience
-            </span>
+        <span class="inline-block text-sm uppercase tracking-[0.35em] text-yellow-500 mb-4">
+            Luxury Experience
+        </span>
 
-            <h2 class="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
-                Begin Your<br>
-                Signature Look
-            </h2>
+        <h2 class="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+            Begin Your Signature Look
+        </h2>
 
-            <p class="text-gray-400 mb-8">
-                Step into elegance and let our expert stylists bring out your best look with premium salon care.
-            </p>
+        <p class="text-gray-300 text-lg mb-8">
+            Step into elegance and let our expert stylists bring out your best look with premium salon care.
+        </p>
 
-            <a href="{{ route('services.index') }}"
-               class="inline-block bg-yellow-500 text-black px-8 py-3 rounded-full font-semibold hover:bg-yellow-400 transition">
-                Explore Services
-            </a>
-
-        </div>
+        <a href="{{ route('services.index') }}"
+           class="inline-block bg-yellow-500 text-black px-10 py-4 rounded-full font-semibold hover:bg-yellow-400 transition">
+            Explore Services
+        </a>
 
     </div>
 </section>

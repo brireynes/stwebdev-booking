@@ -2,10 +2,18 @@
 
 @section('content')
 
+@php
+    $heroImage = $homepageImages['hero_banner']->image ?? null;
+    $servicesImage = $homepageImages['services_card']->image ?? null;
+    $packagesImage = $homepageImages['packages_card']->image ?? null;
+    $promosImage = $homepageImages['promos_card']->image ?? null;
+    $ctaImage = $homepageImages['cta_banner']->image ?? null;
+@endphp
+
 <!-- HERO BANNER -->
 <section id="home"
     class="relative w-full min-h-[650px] bg-cover bg-center flex items-center"
-    style="background-image: url('{{ isset($homepageImages['hero_banner']) && $homepageImages['hero_banner']->image ? asset('storage/' . $homepageImages['hero_banner']->image) : asset('images/salon-banner.jpg') }}');">
+    style="background-image: url('{{ $heroImage ? asset($heroImage) : asset('images/salon-banner.jpg') }}');">
 
     <div class="absolute inset-0 bg-black/50"></div>
 
@@ -18,7 +26,7 @@
             Experience premium beauty services with comfort and style
         </p>
 
-        <a href="{{ route('bookings.index') }}"
+        <a href="{{ route('services.index') }}"
            class="inline-block bg-yellow-500 text-black px-8 py-3 rounded-full font-semibold hover:bg-yellow-400 transition">
             Book Now
         </a>
@@ -49,8 +57,8 @@
             <a href="{{ route('services.index') }}#services"
                class="group block overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm hover:shadow-xl transition">
 
-                @if(isset($homepageImages['services_card']) && $homepageImages['services_card']->image)
-                    <img src="{{ asset('storage/' . $homepageImages['services_card']->image) }}"
+                @if($servicesImage)
+                    <img src="{{ asset($servicesImage) }}"
                          alt="Services"
                          class="w-full h-72 object-cover transition duration-500 group-hover:scale-105">
                 @else
@@ -78,8 +86,8 @@
             <a href="{{ route('services.index') }}#packages"
                class="group block overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm hover:shadow-xl transition">
 
-                @if(isset($homepageImages['packages_card']) && $homepageImages['packages_card']->image)
-                    <img src="{{ asset('storage/' . $homepageImages['packages_card']->image) }}"
+                @if($packagesImage)
+                    <img src="{{ asset($packagesImage) }}"
                          alt="Packages"
                          class="w-full h-72 object-cover transition duration-500 group-hover:scale-105">
                 @else
@@ -107,8 +115,8 @@
             <a href="{{ route('services.index') }}#promos"
                class="group block overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm hover:shadow-xl transition">
 
-                @if(isset($homepageImages['promos_card']) && $homepageImages['promos_card']->image)
-                    <img src="{{ asset('storage/' . $homepageImages['promos_card']->image) }}"
+                @if($promosImage)
+                    <img src="{{ asset($promosImage) }}"
                          alt="Promos"
                          class="w-full h-72 object-cover transition duration-500 group-hover:scale-105">
                 @else
@@ -156,64 +164,37 @@
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-            <!-- Testimonial 1 -->
             <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-200 hover:shadow-xl transition">
-                <div class="text-yellow-500 text-lg mb-4">
-                    ★★★★★
-                </div>
+                <div class="text-yellow-500 text-lg mb-4">★★★★★</div>
 
                 <p class="text-gray-600 leading-relaxed mb-6">
                     “The service was relaxing and professional. My hair looked fresh, smooth, and beautifully styled.”
                 </p>
 
-                <div>
-                    <h3 class="font-bold text-black">
-                        Maria Santos
-                    </h3>
-                    <p class="text-sm text-gray-500">
-                        Hair Rebond Client
-                    </p>
-                </div>
+                <h3 class="font-bold text-black">Maria Santos</h3>
+                <p class="text-sm text-gray-500">Hair Rebond Client</p>
             </div>
 
-            <!-- Testimonial 2 -->
             <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-200 hover:shadow-xl transition">
-                <div class="text-yellow-500 text-lg mb-4">
-                    ★★★★★
-                </div>
+                <div class="text-yellow-500 text-lg mb-4">★★★★★</div>
 
                 <p class="text-gray-600 leading-relaxed mb-6">
                     “Bong's Salon gave me a complete glow-up. The staff were kind, careful, and very accommodating.”
                 </p>
 
-                <div>
-                    <h3 class="font-bold text-black">
-                        Angela Reyes
-                    </h3>
-                    <p class="text-sm text-gray-500">
-                        Hair Color Client
-                    </p>
-                </div>
+                <h3 class="font-bold text-black">Angela Reyes</h3>
+                <p class="text-sm text-gray-500">Hair Color Client</p>
             </div>
 
-            <!-- Testimonial 3 -->
             <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-200 hover:shadow-xl transition">
-                <div class="text-yellow-500 text-lg mb-4">
-                    ★★★★★
-                </div>
+                <div class="text-yellow-500 text-lg mb-4">★★★★★</div>
 
                 <p class="text-gray-600 leading-relaxed mb-6">
                     “The salon feels clean, elegant, and comfortable. I loved the final result and would come back again.”
                 </p>
 
-                <div>
-                    <h3 class="font-bold text-black">
-                        Camille Dela Cruz
-                    </h3>
-                    <p class="text-sm text-gray-500">
-                        Salon Package Client
-                    </p>
-                </div>
+                <h3 class="font-bold text-black">Camille Dela Cruz</h3>
+                <p class="text-sm text-gray-500">Salon Package Client</p>
             </div>
 
         </div>
@@ -221,7 +202,7 @@
 </section>
 
 <!-- FEATURED SERVICES SECTION -->
-<section class="w-full bg-[#f8f5ef] py-20">
+<section class="w-full bg-white py-20">
     <div class="max-w-7xl mx-auto px-6">
 
         <div class="text-center mb-12">
@@ -240,71 +221,45 @@
 
         @if($featuredServices->count())
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                @foreach($featuredServices as $service)
-                    <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-200 hover:shadow-xl transition">
-
-                        @if($service->image)
-                            <img src="{{ asset('storage/' . $service->image) }}"
-                                 alt="{{ $service->name }}"
-                                 class="w-full h-64 object-cover">
-                        @else
-                            <div class="w-full h-64 bg-gray-100 flex items-center justify-center text-gray-400">
-                                No image
-                            </div>
-                        @endif
-
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-black mb-2">
-                                {{ $service->name }}
-                            </h3>
-
-                            <p class="text-gray-600 text-sm mb-5">
-                                {{ \Illuminate\Support\Str::limit($service->description, 90) }}
-                            </p>
-
-                            <a href="{{ route('services.index') }}"
-                               class="text-yellow-600 font-semibold hover:text-yellow-700 transition">
-                                View Service →
-                            </a>
-                        </div>
-                    </div>
+                @foreach($featuredServices as $item)
+                    @include('partials.service-card', ['item' => $item])
                 @endforeach
             </div>
         @else
-            <p class="text-center text-gray-500">
-                No featured services selected yet.
-            </p>
+            <div class="text-center text-gray-500">
+                No featured services available.
+            </div>
         @endif
 
+        <div class="text-center mt-12">
+            <a href="{{ route('services.index') }}"
+               class="inline-block bg-black text-white px-8 py-3 rounded-full font-semibold hover:bg-gray-800 transition">
+                View All Services
+            </a>
+        </div>
     </div>
 </section>
-<!-- CTA BANNER (FULL BACKGROUND) -->
-<section class="relative w-full min-h-[500px] flex items-center justify-center bg-cover bg-center"
-    style="background-image: url('{{ isset($homepageImages['cta_banner']) && $homepageImages['cta_banner']->image ? asset('storage/' . $homepageImages['cta_banner']->image) : asset('images/cta-default.jpg') }}');">
 
-    <!-- Dark overlay -->
-    <div class="absolute inset-0 bg-black/60"></div>
+<!-- CTA BANNER -->
+<section class="relative w-full min-h-[450px] bg-cover bg-center flex items-center"
+    style="background-image: url('{{ $ctaImage ? asset($ctaImage) : asset('images/home-cta.png') }}');">
 
-    <!-- Content -->
-    <div class="relative z-10 text-center px-6 max-w-3xl">
+    <div class="absolute inset-0 bg-black/50"></div>
 
-        <span class="inline-block text-sm uppercase tracking-[0.35em] text-yellow-500 mb-4">
-            Luxury Experience
-        </span>
-
-        <h2 class="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
-            Begin Your Signature Look
+    <div class="relative z-10 max-w-7xl mx-auto px-6 text-white text-center">
+        <h2 class="text-3xl md:text-5xl font-bold mb-4">
+            Ready for Your Salon Glow-Up?
         </h2>
 
-        <p class="text-gray-300 text-lg mb-8">
-            Step into elegance and let our expert stylists bring out your best look with premium salon care.
+        <p class="text-lg md:text-xl mb-8 text-gray-200 max-w-2xl mx-auto">
+            Book your appointment today and experience the Bong's Salon difference.
         </p>
 
         <a href="{{ route('services.index') }}"
-           class="inline-block bg-yellow-500 text-black px-10 py-4 rounded-full font-semibold hover:bg-yellow-400 transition">
-            Explore Services
+           class="inline-block bg-yellow-500 text-black px-8 py-3 rounded-full font-semibold hover:bg-yellow-400 transition">
+            Book Now
         </a>
-
     </div>
 </section>
+
 @endsection

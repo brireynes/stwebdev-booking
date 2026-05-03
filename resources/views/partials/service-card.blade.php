@@ -1,60 +1,54 @@
-<article class="flex flex-col justify-between h-full rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition hover:shadow-md">
+<div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden p-5">
+    @if($item->image)
+        <img
+            src="{{ asset($item->image) }}"
+            alt="{{ $item->name }}"
+            class="w-full h-72 object-cover rounded-xl border border-gray-200"
+        >
+    @else
+        <div class="w-full h-72 rounded-xl border border-gray-200 flex items-center justify-center text-gray-400">
+            No image
+        </div>
+    @endif
 
-    <!-- Image -->
-<div class="mb-5 w-full aspect-[4/3] bg-gray-50 rounded-xl border border-gray-200 flex items-center justify-center overflow-hidden">
-
-@if($item->image)
-    <img
-        src="{{ asset('storage/' . $item->image) }}"
-        alt="{{ $item->name }}"
-        class="h-full w-full object-cover"
-    >
-@else
-    <span class="text-gray-400">No image</span>
-@endif
-
-</div>
-
-    <!-- Content -->
-    <div class="flex-1">
-        <h2 class="text-xl font-semibold text-gray-900 mb-2">
+    <div class="mt-6">
+        <h3 class="text-2xl font-semibold text-black">
             {{ $item->name }}
-        </h2>
+        </h3>
 
-        <p class="text-gray-500 text-sm mb-5">
+        <p class="mt-2 text-gray-600">
             {{ \Illuminate\Support\Str::limit($item->description, 120) }}
         </p>
 
-        <div class="flex items-center justify-between mb-6">
+        <div class="mt-4 flex items-center justify-between">
             <div>
-                <span class="text-xs uppercase tracking-widest text-gray-400">
-                    Price
-                </span>
-                <p class="text-lg font-bold text-gray-900">
+                <p class="text-sm text-gray-500">Price</p>
+                <p class="text-lg font-bold text-black">
                     ₱{{ number_format($item->price, 2) }}
                 </p>
             </div>
 
-            <span class="text-xs bg-gray-100 px-3 py-1 rounded-full text-gray-600">
+            <p class="text-sm text-gray-500">
                 {{ $item->duration }} mins
-            </span>
+            </p>
+        </div>
+
+        <div class="mt-5">
+            @auth
+                <a
+                    href="{{ route('booking.create', $item->id) }}"
+                    class="block text-center bg-black text-white px-4 py-3 rounded-xl hover:bg-gray-800 transition"
+                >
+                    Book Now
+                </a>
+            @else
+                <a
+                    href="{{ route('login') }}"
+                    class="block text-center bg-black text-white px-4 py-3 rounded-xl hover:bg-gray-800 transition"
+                >
+                    Book Now
+                </a>
+            @endauth
         </div>
     </div>
-
-    <!-- Button -->
-    <div class="mt-auto">
-        @auth
-            <a href="{{ route('booking.create', $item->id) }}"
-               class="block w-full rounded-xl bg-yellow-500 px-5 py-3 text-center font-semibold text-white hover:bg-yellow-600 transition">
-                Book Now
-            </a>
-        @else
-            <button type="button"
-                    onclick="openLoginModal()"
-                    class="block w-full rounded-xl bg-yellow-500 px-5 py-3 text-center font-semibold text-white hover:bg-yellow-600 transition">
-                Book Now
-            </button>
-        @endauth
-    </div>
-
-</article>
+</div>
